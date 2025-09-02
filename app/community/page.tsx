@@ -73,6 +73,13 @@ export default function CentraSocialPage() {
   const [followedUsers, setFollowedUsers] = useState<string[]>([])
   const { toast } = useToast()
 
+  const [liveStats, setLiveStats] = useState({
+    activeMembers: 0,
+    postsThisMonth: 0,
+    totalPosts: 0,
+    contributors: 0,
+  })
+
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -297,6 +304,48 @@ export default function CentraSocialPage() {
       clearInterval(postInterval)
     }
   }, [addRandomActivity, addSimulatedPost])
+
+  useEffect(() => {
+    const fetchLiveStats = async () => {
+      try {
+        const supabase = createClient()
+
+        // Get total users count
+        const { count: usersCount } = await supabase.from("profiles").select("*", { count: "exact", head: true })
+
+        // Get posts this month
+        const startOfMonth = new Date()
+        startOfMonth.setDate(1)
+        startOfMonth.setHours(0, 0, 0, 0)
+
+        const { count: postsThisMonth } = await supabase
+          .from("posts")
+          .select("*", { count: "exact", head: true })
+          .gte("created_at", startOfMonth.toISOString())
+
+        // Get total posts
+        const { count: totalPosts } = await supabase.from("posts").select("*", { count: "exact", head: true })
+
+        // Get contributors (users who have posted)
+        const { data: contributors } = await supabase.from("posts").select("author_id").not("author_id", "is", null)
+
+        const uniqueContributors = new Set(contributors?.map((p) => p.author_id) || []).size
+
+        setLiveStats({
+          activeMembers: usersCount || 0,
+          postsThisMonth: postsThisMonth || 0,
+          totalPosts: totalPosts || 0,
+          contributors: uniqueContributors,
+        })
+      } catch (error) {
+        console.error("Error fetching live stats:", error)
+      }
+    }
+
+    if (user) {
+      fetchLiveStats()
+    }
+  }, [user])
 
   const handleCreatePost = async () => {
     if (!user) {
@@ -1036,24 +1085,35 @@ export default function CentraSocialPage() {
       </div>
 
       {/* ... existing footer section ... */}
-      <section className="py-16 bg-card">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center mb-12">
-            <Image
-              src="/centra-wordmark.png"
-              alt="Centra"
-              width={200}
-              height={60}
-              className="hover:scale-105 transition-transform duration-200"
-            />
-          </div>
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Centra Social Stats</h2>
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { label: "Active Members", value: "12,847", icon: "👥", color: "text-primary" },
-              { label: "Posts This Month", value: "1,234", icon: "💬", color: "text-secondary" },
-              { label: "Countries", value: "89", icon: "🌍", color: "text-primary" },
-              { label: "Contributors", value: "456", icon: "🛠️", color: "text-secondary" },
+              {
+                label: "Active Members",
+                value: liveStats.activeMembers.toLocaleString(),
+                icon: "👥",
+                color: "text-[#1C60FF]",
+              },
+              {
+                label: "Posts This Month",
+                value: liveStats.postsThisMonth.toLocaleString(),
+                icon: "💬",
+                color: "text-secondary",
+              },
+              {
+                label: "Total Posts",
+                value: liveStats.totalPosts.toLocaleString(),
+                icon: "📝",
+                color: "text-[#1C60FF]",
+              },
+              {
+                label: "Contributors",
+                value: liveStats.contributors.toLocaleString(),
+                icon: "🛠️",
+                color: "text-secondary",
+              },
             ].map((stat, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
