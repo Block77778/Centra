@@ -9,7 +9,6 @@ import PersistentCTA from "@/components/PersistentCTA"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { useToast } from "@/hooks/use-toast"
-import EarthVisualization from "./EarthVisualization"
 
 export default function CentraHomepage() {
   const [email, setEmail] = useState("")
@@ -279,30 +278,43 @@ export default function CentraHomepage() {
       </nav>
 
       <section className="relative h-[85vh] overflow-hidden" role="banner">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C60FF]/20 via-background to-[#1C60FF]/10">
-          <div className="absolute inset-0 flex items-center justify-center opacity-60">
-            <EarthVisualization />
-          </div>
-        </div>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover scale-105 animate-slow-zoom"
+          aria-label="Background video showing AI and cybersecurity technology"
+        >
+          <source
+            src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4"
+            type="video/mp4"
+          />
+          <source
+            src="/placeholder.mp4?height=1440&width=2560&query=AI artificial intelligence cybersecurity digital protection neural networks data encryption futuristic technology holographic interface"
+            type="video/mp4"
+          />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
         <div className="relative z-10 flex items-center justify-center h-full px-6">
-          <div className="text-center text-foreground max-w-6xl animate-fade-in-up">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-8 leading-tight tracking-tight">
+          <div className="text-center text-white max-w-6xl animate-fade-in-up">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light mb-8 leading-tight tracking-tight">
               Centra:
               <br />
-              <span className="bg-gradient-to-r from-[#1C60FF] via-[#1C60FF] to-[#1C60FF] bg-clip-text text-transparent animate-gradient">
+              <span className="bg-gradient-to-r from-[#1C60FF] via-[#1C60FF] to-[#1C60FF] bg-clip-text text-transparent font-medium animate-gradient">
                 The Currency
               </span>
               <br />
               of All People
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-10 leading-relaxed max-w-4xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-10 font-light leading-relaxed max-w-4xl mx-auto">
               A stable, transparent, and borderless alternative to broken fiat systems.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button
                 size="lg"
                 onClick={scrollToNewsletter}
-                className="bg-[#1C60FF] text-white hover:bg-[#1C60FF]/90 hover:scale-105 px-10 py-4 text-lg transition-all duration-300 shadow-lg"
+                className="bg-white text-black hover:bg-white/90 hover:scale-105 px-10 py-4 text-lg font-medium transition-all duration-300 shadow-lg"
               >
                 Join the Movement
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -311,7 +323,7 @@ export default function CentraHomepage() {
                 size="lg"
                 variant="outline"
                 onClick={scrollToFeatures}
-                className="border-[#1C60FF]/30 text-foreground hover:bg-[#1C60FF]/10 hover:border-[#1C60FF]/50 px-10 py-4 text-lg backdrop-blur-sm bg-transparent transition-all duration-300"
+                className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-10 py-4 text-lg font-medium backdrop-blur-sm bg-transparent transition-all duration-300"
               >
                 Read the Vision
               </Button>
@@ -561,7 +573,7 @@ export default function CentraHomepage() {
             <Button
               size="lg"
               onClick={scrollToNewsletter}
-              className="bg-[#1C60FF] hover:bg-[#1C60FF]/90 text-white px-8 py-4 text-lg hover:scale-105 transition-all duration-300 shadow-lg"
+              className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 h-14 px-8 text-lg transition-all duration-300 shadow-lg"
             >
               Join the Financial Revolution
               <ArrowRight className="ml-2 h-5 w-5" />
