@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Users, TrendingUp, Eye, Menu, X } from "lucide-react"
@@ -14,7 +13,16 @@ import { useToast } from "@/hooks/use-toast"
 export default function CentraHomepage() {
   const [email, setEmail] = useState("")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [showPopup, setShowPopup] = useState(false)
   const { toast } = useToast()
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPopup(true)
+    }, 30000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -27,7 +35,6 @@ export default function CentraHomepage() {
       return
     }
 
-    // Simulate API call
     try {
       toast({
         title: "Successfully subscribed!",
@@ -37,6 +44,35 @@ export default function CentraHomepage() {
     } catch (error) {
       toast({
         title: "Subscription failed",
+        description: "Please try again later.",
+        variant: "destructive",
+      })
+    }
+  }
+
+  const handlePopupSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const formData = new FormData(e.target as HTMLFormElement)
+    const popupEmail = formData.get("popup-email") as string
+
+    if (!popupEmail) {
+      toast({
+        title: "Email required",
+        description: "Please enter your email address.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    try {
+      toast({
+        title: "Welcome to the future!",
+        description: "Thank you for joining Centra. We'll be in touch soon.",
+      })
+      setShowPopup(false)
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
         description: "Please try again later.",
         variant: "destructive",
       })
@@ -61,6 +97,34 @@ export default function CentraHomepage() {
     <div className="min-h-screen bg-background">
       <PersistentCTA />
 
+      {showPopup && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          <div className="bg-[#1C60FF] rounded-lg p-8 max-w-md w-full text-white relative animate-fade-in-up">
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
+              aria-label="Close popup"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <h3 className="text-2xl mb-4">Ready to join the future of money?</h3>
+            <p className="text-white/90 mb-6">Start using Centra today and be part of the financial revolution.</p>
+            <form onSubmit={handlePopupSubmit} className="space-y-4">
+              <Input
+                name="popup-email"
+                type="email"
+                placeholder="Enter your email"
+                className="bg-white text-black border-0 h-12"
+                required
+              />
+              <Button type="submit" className="w-full bg-white text-[#1C60FF] hover:bg-white/90 h-12 text-lg">
+                Start using Centra
+              </Button>
+            </form>
+          </div>
+        </div>
+      )}
+
       <nav
         className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50"
         role="navigation"
@@ -79,6 +143,12 @@ export default function CentraHomepage() {
                 />
               </div>
               <div className="hidden md:flex items-center space-x-6 text-sm">
+                <a
+                  href="/about"
+                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200"
+                >
+                  Learn about Centra
+                </a>
                 <a
                   href="#"
                   onClick={scrollToNewsletter}
@@ -123,9 +193,16 @@ export default function CentraHomepage() {
                 variant="outline"
                 size="sm"
                 onClick={scrollToNewsletter}
-                className="text-sm bg-transparent hover:bg-[#1C60FF]/10 hover:border-[#1C60FF] transition-all duration-200"
+                className="text-sm bg-transparent hover:bg-[#1C60FF]/10 hover:border-[#1C60FF] transition-all duration-200 flex items-center gap-2"
               >
-                Get Started
+                <Image
+                  src="/centra-icon.png"
+                  alt="Purchase Centra"
+                  width={20}
+                  height={20}
+                  className="hover:scale-110 transition-transform duration-200"
+                />
+                Purchase
               </Button>
               <Button
                 variant="ghost"
@@ -142,6 +219,13 @@ export default function CentraHomepage() {
           {mobileMenuOpen && (
             <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
               <div className="px-2 pt-2 pb-3 space-y-1">
+                <a
+                  href="/about"
+                  className="block px-3 py-2 text-foreground hover:text-[#1C60FF] hover:bg-[#1C60FF]/10 rounded-md transition-all duration-200"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Learn about Centra
+                </a>
                 <a
                   href="#"
                   onClick={() => {
@@ -194,54 +278,74 @@ export default function CentraHomepage() {
       </nav>
 
       <section className="relative h-[85vh] overflow-hidden" role="banner">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover scale-105 animate-slow-zoom"
-          aria-label="Background video showing AI and cybersecurity technology"
-        >
-          <source
-            src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4"
-            type="video/mp4"
-          />
-          <source
-            src="/placeholder.mp4?height=1440&width=2560&query=AI artificial intelligence cybersecurity digital protection neural networks data encryption futuristic technology holographic interface"
-            type="video/mp4"
-          />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1C60FF]/20 via-background to-[#1C60FF]/10">
+          <div className="absolute inset-0 opacity-30">
+            <svg className="w-full h-full" viewBox="0 0 1920 1080" fill="none">
+              <defs>
+                <pattern id="globe-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                  <circle cx="50" cy="50" r="1" fill="currentColor" className="text-[#1C60FF]/40 animate-pulse" />
+                </pattern>
+              </defs>
+              <circle cx="960" cy="540" r="300" fill="url(#globe-pattern)" className="animate-slow-zoom" />
+              <path
+                d="M660 540 Q960 240 1260 540 Q960 840 660 540"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                className="text-[#1C60FF]/60 animate-pulse"
+              />
+              <path
+                d="M960 240 Q1260 540 960 840 Q660 540 960 240"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                className="text-[#1C60FF]/60 animate-pulse"
+              />
+              <text x="800" y="400" className="text-[#1C60FF]/40 text-4xl animate-fade-in">
+                $
+              </text>
+              <text x="1100" y="500" className="text-[#1C60FF]/40 text-4xl animate-fade-in">
+                €
+              </text>
+              <text x="850" y="650" className="text-[#1C60FF]/40 text-4xl animate-fade-in">
+                ¥
+              </text>
+              <text x="1050" y="650" className="text-[#1C60FF]/40 text-4xl animate-fade-in">
+                £
+              </text>
+            </svg>
+          </div>
+        </div>
         <div className="relative z-10 flex items-center justify-center h-full px-6">
-          <div className="text-center text-white max-w-6xl animate-fade-in-up">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light mb-8 leading-tight tracking-tight">
-              A Stable,
+          <div className="text-center text-foreground max-w-6xl animate-fade-in-up">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-8 leading-tight tracking-tight">
+              Centra:
               <br />
-              <span className="bg-gradient-to-r from-[#1C60FF] via-[#1C60FF] to-[#1C60FF] bg-clip-text text-transparent font-medium animate-gradient">
-                Transparent Future
+              <span className="bg-gradient-to-r from-[#1C60FF] via-[#1C60FF] to-[#1C60FF] bg-clip-text text-transparent animate-gradient">
+                The Currency
               </span>
               <br />
-              Beyond Fiat
+              of All People
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-10 font-light leading-relaxed max-w-4xl mx-auto">
-              Designed to end inflation, corruption, and inequality in money.
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-10 leading-relaxed max-w-4xl mx-auto">
+              A stable, transparent, and borderless alternative to broken fiat systems.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button
                 size="lg"
                 onClick={scrollToNewsletter}
-                className="bg-white text-black hover:bg-white/90 hover:scale-105 px-10 py-4 text-lg font-medium transition-all duration-300 shadow-lg"
+                className="bg-[#1C60FF] text-white hover:bg-[#1C60FF]/90 hover:scale-105 px-10 py-4 text-lg transition-all duration-300 shadow-lg"
               >
-                Get Started
+                Join the Movement
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 onClick={scrollToFeatures}
-                className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-10 py-4 text-lg font-medium backdrop-blur-sm bg-transparent transition-all duration-300"
+                className="border-[#1C60FF]/30 text-foreground hover:bg-[#1C60FF]/10 hover:border-[#1C60FF]/50 px-10 py-4 text-lg backdrop-blur-sm bg-transparent transition-all duration-300"
               >
-                How Centra Works
+                Read the Vision
               </Button>
             </div>
           </div>
@@ -251,8 +355,8 @@ export default function CentraHomepage() {
       <section className="py-32 px-6" id="features-section">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-20">
-            <p className="text-sm text-muted-foreground mb-6 uppercase tracking-wider font-medium">Core Features</p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-10 leading-tight max-w-4xl mx-auto">
+            <p className="text-sm text-muted-foreground mb-6 uppercase tracking-wider">Core Features</p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-10 leading-tight max-w-4xl mx-auto">
               Money should serve people, not control them.
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
@@ -268,7 +372,7 @@ export default function CentraHomepage() {
               >
                 <TrendingUp className="h-10 w-10 text-[#1C60FF]" />
               </div>
-              <CardTitle className="text-2xl font-medium text-foreground mb-6">Stability</CardTitle>
+              <CardTitle className="text-2xl text-foreground mb-6">Stability</CardTitle>
               <CardDescription className="text-muted-foreground text-lg leading-relaxed">
                 Fixed supply, non-inflationary design ensures your money maintains its value over time.
               </CardDescription>
@@ -281,7 +385,7 @@ export default function CentraHomepage() {
               >
                 <Eye className="h-10 w-10 text-[#1C60FF]" />
               </div>
-              <CardTitle className="text-2xl font-medium text-foreground mb-6">Transparency</CardTitle>
+              <CardTitle className="text-2xl text-foreground mb-6">Transparency</CardTitle>
               <CardDescription className="text-muted-foreground text-lg leading-relaxed">
                 All transactions are visible and verifiable, eliminating corruption and hidden manipulation.
               </CardDescription>
@@ -294,7 +398,7 @@ export default function CentraHomepage() {
               >
                 <Users className="h-10 w-10 text-[#1C60FF]" />
               </div>
-              <CardTitle className="text-2xl font-medium text-foreground mb-6">Equality</CardTitle>
+              <CardTitle className="text-2xl text-foreground mb-6">Equality</CardTitle>
               <CardDescription className="text-muted-foreground text-lg leading-relaxed">
                 Accessible to everyone, regardless of location, status, or financial background.
               </CardDescription>
@@ -388,7 +492,7 @@ export default function CentraHomepage() {
 
         <div className="max-w-6xl mx-auto px-6 pt-32">
           <div className="text-center mb-16">
-            <h3 className="text-4xl md:text-5xl font-medium text-foreground mb-6">The Financial Revolution</h3>
+            <h3 className="text-4xl md:text-5xl text-foreground mb-6">The Financial Revolution</h3>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Compare the limitations of traditional fiat currency with Centra's innovative solutions for a better
               financial future.
@@ -396,14 +500,13 @@ export default function CentraHomepage() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Fiat Problems Card */}
             <Card className="border border-border bg-background hover:shadow-xl hover:scale-105 transition-all duration-300 p-8">
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-16 h-16 bg-gradient-to-br from-muted to-muted/80 rounded-full flex items-center justify-center">
                   <span className="text-2xl">🏦</span>
                 </div>
                 <div>
-                  <h4 className="text-2xl font-medium text-foreground">Fiat Currency Problems</h4>
+                  <h4 className="text-2xl text-foreground">Fiat Currency Problems</h4>
                   <p className="text-muted-foreground">Current system limitations</p>
                 </div>
               </div>
@@ -430,7 +533,7 @@ export default function CentraHomepage() {
                   <div key={index} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-muted-foreground rounded-full mt-3 flex-shrink-0" />
                     <div>
-                      <p className="text-foreground font-medium mb-1">{problem.title}</p>
+                      <p className="text-foreground mb-1">{problem.title}</p>
                       <p className="text-muted-foreground text-sm">{problem.description}</p>
                     </div>
                   </div>
@@ -438,7 +541,6 @@ export default function CentraHomepage() {
               </div>
             </Card>
 
-            {/* Centra Solutions Card */}
             <Card className="border border-border bg-gradient-to-br from-[#1C60FF]/5 to-[#1C60FF]/10 hover:shadow-xl hover:scale-105 transition-all duration-300 p-8">
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center">
@@ -451,7 +553,7 @@ export default function CentraHomepage() {
                   />
                 </div>
                 <div>
-                  <h4 className="text-2xl font-medium text-[#1C60FF]">Centra Solutions</h4>
+                  <h4 className="text-2xl text-[#1C60FF]">Centra Solutions</h4>
                   <p className="text-[#1C60FF]/80">Revolutionary improvements</p>
                 </div>
               </div>
@@ -478,7 +580,7 @@ export default function CentraHomepage() {
                   <div key={index} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-[#1C60FF] rounded-full mt-3 flex-shrink-0" />
                     <div>
-                      <p className="text-[#1C60FF] font-medium mb-1">{solution.title}</p>
+                      <p className="text-[#1C60FF] mb-1">{solution.title}</p>
                       <p className="text-[#1C60FF]/80 text-sm">{solution.description}</p>
                     </div>
                   </div>
@@ -487,12 +589,11 @@ export default function CentraHomepage() {
             </Card>
           </div>
 
-          {/* Simplified call to action */}
           <div className="text-center mt-12">
             <Button
               size="lg"
               onClick={scrollToNewsletter}
-              className="bg-[#1C60FF] hover:bg-[#1C60FF]/90 text-white px-8 py-4 text-lg font-medium hover:scale-105 transition-all duration-300 shadow-lg"
+              className="bg-[#1C60FF] hover:bg-[#1C60FF]/90 text-white px-8 py-4 text-lg hover:scale-105 transition-all duration-300 shadow-lg"
             >
               Join the Financial Revolution
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -503,7 +604,7 @@ export default function CentraHomepage() {
 
       <section className="py-24 px-6 bg-gradient-to-b from-muted/20 to-muted/40" id="newsletter-section">
         <div className="max-w-3xl mx-auto text-center">
-          <h3 className="text-3xl font-medium text-foreground mb-6">Subscribe to Centra newsletter</h3>
+          <h3 className="text-3xl text-foreground mb-6">Subscribe to Centra newsletter</h3>
           <p className="text-xl text-muted-foreground mb-12">
             Get the latest updates on Centra ID, new features, and community news.
           </p>
@@ -523,7 +624,7 @@ export default function CentraHomepage() {
             />
             <Button
               type="submit"
-              className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 h-14 px-8 text-lg font-medium transition-all duration-300 shadow-lg"
+              className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 h-14 px-8 text-lg transition-all duration-300 shadow-lg"
               aria-describedby="email-description"
             >
               Subscribe
@@ -549,7 +650,7 @@ export default function CentraHomepage() {
 
           <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
             <div>
-              <h4 className="font-medium text-foreground mb-4">Centra ID</h4>
+              <h4 className="text-foreground mb-4">Centra ID</h4>
               <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Centra ID links">
                 <div>
                   <a
@@ -578,7 +679,7 @@ export default function CentraHomepage() {
               </nav>
             </div>
             <div>
-              <h4 className="font-medium text-foreground mb-4">Centra App</h4>
+              <h4 className="text-foreground mb-4">Centra App</h4>
               <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Centra App links">
                 <div>
                   <a
@@ -607,7 +708,7 @@ export default function CentraHomepage() {
               </nav>
             </div>
             <div>
-              <h4 className="font-medium text-foreground mb-4">Centracoin</h4>
+              <h4 className="text-foreground mb-4">Centracoin</h4>
               <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Centracoin links">
                 <div>
                   <a
@@ -636,7 +737,7 @@ export default function CentraHomepage() {
               </nav>
             </div>
             <div>
-              <h4 className="font-medium text-foreground mb-4">Developers</h4>
+              <h4 className="text-foreground mb-4">Developers</h4>
               <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Developers links">
                 <div>
                   <a
@@ -667,7 +768,7 @@ export default function CentraHomepage() {
               </nav>
             </div>
             <div>
-              <h4 className="font-medium text-foreground mb-4">Company</h4>
+              <h4 className="text-foreground mb-4">Company</h4>
               <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Company links">
                 <div>
                   <a
@@ -696,7 +797,7 @@ export default function CentraHomepage() {
               </nav>
             </div>
             <div>
-              <h4 className="font-medium text-foreground mb-4">Legal</h4>
+              <h4 className="text-foreground mb-4">Legal</h4>
               <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Legal links">
                 <div>
                   <a
