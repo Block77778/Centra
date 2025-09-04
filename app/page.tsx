@@ -14,6 +14,7 @@ export default function CentraHomepage() {
   const [email, setEmail] = useState("")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
+  const [activeTab, setActiveTab] = useState("inflation")
   const { toast } = useToast()
 
   useEffect(() => {
@@ -327,6 +328,97 @@ export default function CentraHomepage() {
               >
                 Read the Vision
               </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 bg-gradient-to-b from-background to-muted/10">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 leading-tight">
+              Money is Failing Us.
+            </h2>
+          </div>
+
+          <div className="bg-card border border-border rounded-lg p-8 shadow-lg">
+            {/* Interactive tab buttons */}
+            <div className="flex flex-wrap gap-2 mb-8 p-1 bg-muted/50 rounded-lg">
+              <button
+                onClick={() => setActiveTab("inflation")}
+                className={`px-4 py-2 rounded-md text-sm transition-all duration-200 ${
+                  activeTab === "inflation"
+                    ? "bg-[#1C60FF] text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background"
+                }`}
+              >
+                Inflation
+              </button>
+              <button
+                onClick={() => setActiveTab("manipulation")}
+                className={`px-4 py-2 rounded-md text-sm transition-all duration-200 ${
+                  activeTab === "manipulation"
+                    ? "bg-[#1C60FF] text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background"
+                }`}
+              >
+                Political Control
+              </button>
+              <button
+                onClick={() => setActiveTab("exclusion")}
+                className={`px-4 py-2 rounded-md text-sm transition-all duration-200 ${
+                  activeTab === "exclusion"
+                    ? "bg-[#1C60FF] text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background"
+                }`}
+              >
+                Financial Exclusion
+              </button>
+            </div>
+
+            {/* Tab content */}
+            <div className="min-h-[200px]">
+              {activeTab === "inflation" && (
+                <div className="animate-fade-in">
+                  <h3 className="text-2xl text-foreground mb-4">Your Money Loses Value Every Day</h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                    Central banks print unlimited money, devaluing your savings and eroding purchasing power. What cost
+                    $100 in 2000 now costs over $170 due to inflation.
+                  </p>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    Your hard-earned money becomes worth less while those closest to the money printer benefit most.
+                    This isn't an accident—it's by design.
+                  </p>
+                </div>
+              )}
+
+              {activeTab === "manipulation" && (
+                <div className="animate-fade-in">
+                  <h3 className="text-2xl text-foreground mb-4">Politicians Control Your Financial Future</h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                    Monetary policy serves political interests, not people. Interest rates, money supply, and economic
+                    decisions are made behind closed doors by unelected officials.
+                  </p>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    Your financial freedom depends on the whims of politicians who have never experienced the
+                    consequences of their decisions on ordinary people.
+                  </p>
+                </div>
+              )}
+
+              {activeTab === "exclusion" && (
+                <div className="animate-fade-in">
+                  <h3 className="text-2xl text-foreground mb-4">Billions Are Left Behind</h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                    Over 1.7 billion people lack access to basic banking services. Geographic borders, documentation
+                    requirements, and minimum balances exclude the world's most vulnerable.
+                  </p>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    The current financial system creates artificial barriers that prevent human prosperity and
+                    perpetuate inequality across the globe.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
