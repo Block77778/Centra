@@ -333,28 +333,29 @@ export default function CentraHomepage() {
       </section>
 
       <section className="py-24 px-6 bg-gradient-to-b from-background to-muted/10">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 leading-tight">
               Money is Failing Us.
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          {/* Desktop: 4 columns horizontal layout */}
+          <div className="hidden md:grid md:grid-cols-4 gap-6">
             {/* Inflation Card */}
-            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="aspect-[4/3] relative overflow-hidden">
+            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl group">
+              <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
                 <Image
-                  src="/person-looking-worried-at-financial-documents-infl.jpg"
-                  alt="Person concerned about inflation and rising costs"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
+                  src="/professional-business-person-reviewing-financial-d.jpg"
+                  alt="Professional reviewing financial documents with concern about inflation"
+                  width={320}
+                  height={240}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-2xl text-foreground mb-4">Inflation</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="text-xl text-foreground mb-3 font-semibold">Inflation</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Centra is the only currency designed for all people, worldwide. It can not be devalued, it can not be
                   printed by entities for their own purposes; it can not be corrupted.
                 </p>
@@ -362,19 +363,19 @@ export default function CentraHomepage() {
             </Card>
 
             {/* Political Control Card */}
-            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="aspect-[4/3] relative overflow-hidden">
+            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl group">
+              <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
                 <Image
-                  src="/government-building-political-control-monetary-pol.jpg"
-                  alt="Government building representing political control over money"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
+                  src="/professional-business-meeting-discussing-financial.jpg"
+                  alt="Business professionals discussing financial policy and monetary control"
+                  width={320}
+                  height={240}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-2xl text-foreground mb-4">Political Control</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="text-xl text-foreground mb-3 font-semibold">Political Control</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Debt is no longer a trap. With Centra, borrowing is honest: a one-time flat fee instead of endless
                   compounding interest. Credit becomes fair, predictable, and open to all.
                 </p>
@@ -382,19 +383,19 @@ export default function CentraHomepage() {
             </Card>
 
             {/* Financial Exclusion Card */}
-            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="aspect-[4/3] relative overflow-hidden">
+            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl group">
+              <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
                 <Image
-                  src="/diverse-people-excluded-from-banking-financial-ser.jpg"
-                  alt="People excluded from traditional financial services"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
+                  src="/diverse-group-of-people-working-together-on-financ.jpg"
+                  alt="Diverse professionals working on financial inclusion initiatives"
+                  width={320}
+                  height={240}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-2xl text-foreground mb-4">Financial Exclusion</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="text-xl text-foreground mb-3 font-semibold">Financial Exclusion</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Centra ends inflation, ends hidden taxation, and ends all barriers to access. Centra moves freely
                   across borders in seconds, meaning every person holds equal power in the global economy.
                 </p>
@@ -402,24 +403,109 @@ export default function CentraHomepage() {
             </Card>
 
             {/* Borders Card */}
-            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="aspect-[4/3] relative overflow-hidden">
+            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl group">
+              <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
                 <Image
-                  src="/global-community-borderless-currency-worldwide-fin.jpg"
-                  alt="Global community representing borderless financial freedom"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
+                  src="/global-business-professionals-collaborating-across.jpg"
+                  alt="Global professionals collaborating on borderless financial solutions"
+                  width={320}
+                  height={240}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-2xl text-foreground mb-4">Borders</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="text-xl text-foreground mb-3 font-semibold">Borders</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Centra is not built by one founder or one company. Centra only exists based on demand and adoption of
                   the people. Centra is money that belongs to you, community, and only the community can make it real.
                 </p>
               </div>
             </Card>
+          </div>
+
+          <div className="md:hidden">
+            <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+              {/* Inflation Card - Mobile */}
+              <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl flex-shrink-0 w-80 snap-start group">
+                <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
+                  <Image
+                    src="/professional-business-person-reviewing-financial-d.jpg"
+                    alt="Professional reviewing financial documents with concern about inflation"
+                    width={320}
+                    height={240}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl text-foreground mb-3 font-semibold">Inflation</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Centra is the only currency designed for all people, worldwide. It can not be devalued, it can not
+                    be printed by entities for their own purposes; it can not be corrupted.
+                  </p>
+                </div>
+              </Card>
+
+              {/* Political Control Card - Mobile */}
+              <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl flex-shrink-0 w-80 snap-start group">
+                <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
+                  <Image
+                    src="/professional-business-meeting-discussing-financial.jpg"
+                    alt="Business professionals discussing financial policy and monetary control"
+                    width={320}
+                    height={240}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl text-foreground mb-3 font-semibold">Political Control</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Debt is no longer a trap. With Centra, borrowing is honest: a one-time flat fee instead of endless
+                    compounding interest. Credit becomes fair, predictable, and open to all.
+                  </p>
+                </div>
+              </Card>
+
+              {/* Financial Exclusion Card - Mobile */}
+              <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl flex-shrink-0 w-80 snap-start group">
+                <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
+                  <Image
+                    src="/diverse-group-of-people-working-together-on-financ.jpg"
+                    alt="Diverse professionals working on financial inclusion initiatives"
+                    width={320}
+                    height={240}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl text-foreground mb-3 font-semibold">Financial Exclusion</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Centra ends inflation, ends hidden taxation, and ends all barriers to access. Centra moves freely
+                    across borders in seconds, meaning every person holds equal power in the global economy.
+                  </p>
+                </div>
+              </Card>
+
+              {/* Borders Card - Mobile */}
+              <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl flex-shrink-0 w-80 snap-start group">
+                <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
+                  <Image
+                    src="/global-business-professionals-collaborating-across.jpg"
+                    alt="Global professionals collaborating on borderless financial solutions"
+                    width={320}
+                    height={240}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl text-foreground mb-3 font-semibold">Borders</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Centra is not built by one founder or one company. Centra only exists based on demand and adoption
+                    of the people. Centra is money that belongs to you, community, and only the community can make it
+                    real.
+                  </p>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
