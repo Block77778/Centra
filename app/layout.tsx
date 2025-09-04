@@ -7,7 +7,7 @@ const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-poppins",
-  weight: ["400", "500", "600", "700"],
+  weight: ["600"],
 })
 
 export const metadata: Metadata = {
@@ -63,7 +63,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} antialiased`}>
-      <body className="font-[var(--font-poppins)]">{children}</body>
+      <body className="font-[var(--font-poppins)] font-semibold">{children}</body>
     </html>
   )
 }
