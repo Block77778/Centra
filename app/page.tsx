@@ -9,6 +9,7 @@ import PersistentCTA from "@/components/PersistentCTA"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { useToast } from "@/hooks/use-toast"
+import EarthVisualization from "./EarthVisualization"
 
 export default function CentraHomepage() {
   const [email, setEmail] = useState("")
@@ -279,41 +280,8 @@ export default function CentraHomepage() {
 
       <section className="relative h-[85vh] overflow-hidden" role="banner">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1C60FF]/20 via-background to-[#1C60FF]/10">
-          <div className="absolute inset-0 opacity-30">
-            <svg className="w-full h-full" viewBox="0 0 1920 1080" fill="none">
-              <defs>
-                <pattern id="globe-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                  <circle cx="50" cy="50" r="1" fill="currentColor" className="text-[#1C60FF]/40 animate-pulse" />
-                </pattern>
-              </defs>
-              <circle cx="960" cy="540" r="300" fill="url(#globe-pattern)" className="animate-slow-zoom" />
-              <path
-                d="M660 540 Q960 240 1260 540 Q960 840 660 540"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                className="text-[#1C60FF]/60 animate-pulse"
-              />
-              <path
-                d="M960 240 Q1260 540 960 840 Q660 540 960 240"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                className="text-[#1C60FF]/60 animate-pulse"
-              />
-              <text x="800" y="400" className="text-[#1C60FF]/40 text-4xl animate-fade-in">
-                $
-              </text>
-              <text x="1100" y="500" className="text-[#1C60FF]/40 text-4xl animate-fade-in">
-                €
-              </text>
-              <text x="850" y="650" className="text-[#1C60FF]/40 text-4xl animate-fade-in">
-                ¥
-              </text>
-              <text x="1050" y="650" className="text-[#1C60FF]/40 text-4xl animate-fade-in">
-                £
-              </text>
-            </svg>
+          <div className="absolute inset-0 flex items-center justify-center opacity-60">
+            <EarthVisualization />
           </div>
         </div>
         <div className="relative z-10 flex items-center justify-center h-full px-6">
@@ -761,8 +729,9 @@ export default function CentraHomepage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
+                    aria-label="Follow us on X (Twitter)"
                   >
-                    GitHub
+                    X (Twitter)
                   </a>
                 </div>
               </nav>
