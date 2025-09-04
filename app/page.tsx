@@ -580,7 +580,7 @@ export default function CentraHomepage() {
           </div>
 
           {/* Tabbed Interface */}
-          <div className="bg-background border border-border rounded-2xl overflow-hidden shadow-xl">
+          <div className="bg-background border border-border rounded-3xl overflow-hidden shadow-xl">
             {/* Tab Navigation */}
             <div className="flex border-b border-border">
               <button
@@ -740,29 +740,25 @@ export default function CentraHomepage() {
                   )}
                 </div>
 
-                {/* Right side - Mobile mockup placeholder */}
+                {/* Right side - Financial interface mockup */}
                 <div className="flex justify-center">
                   <div className="relative">
-                    <div className="w-64 h-96 bg-gradient-to-br from-[#1C60FF]/10 to-[#1C60FF]/20 rounded-3xl border border-[#1C60FF]/20 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-16 h-16 bg-[#1C60FF]/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <Image src="/centra-icon.png" alt="Centra" width={32} height={32} className="opacity-80" />
-                        </div>
-                        <p className="text-[#1C60FF] text-sm font-medium">Centra Mobile</p>
-                        <p className="text-[#1C60FF]/60 text-xs mt-1">Coming Soon</p>
-                      </div>
-                    </div>
+                    <img
+                      src="/modern-financial-app-interface-showing-payment-tra.jpg"
+                      alt="Financial interface mockup"
+                      className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
+                    />
                   </div>
                 </div>
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+              <div className="flex flex-col sm:flex-row gap-4 mt-12">
                 <Button
                   size="lg"
                   onClick={() => {
-                    const problemSection = document.querySelector('section:has(h2:contains("Money is Failing Us"))')
-                    problemSection?.scrollIntoView({ behavior: "smooth" })
+                    const solutionSection = document.getElementById("centra-solution")
+                    solutionSection?.scrollIntoView({ behavior: "smooth" })
                   }}
                   className="bg-[#1C60FF] text-white hover:bg-[#1C60FF]/90 hover:scale-105 px-8 py-3 transition-all duration-300"
                 >
@@ -771,6 +767,9 @@ export default function CentraHomepage() {
                 <Button
                   size="lg"
                   variant="outline"
+                  onClick={() => {
+                    window.location.href = "/developer-hub"
+                  }}
                   className="border-[#1C60FF] text-[#1C60FF] hover:bg-[#1C60FF]/10 px-8 py-3 transition-all duration-300 bg-transparent"
                 >
                   Learn How Centra Works
