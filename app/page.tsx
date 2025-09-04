@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardTitle } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { ArrowRight, Users, TrendingUp, Eye, Menu, X } from "lucide-react"
 import PersistentCTA from "@/components/PersistentCTA"
 import { Input } from "@/components/ui/input"
@@ -14,7 +14,6 @@ export default function CentraHomepage() {
   const [email, setEmail] = useState("")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
-  const [activeTab, setActiveTab] = useState("inflation")
   const { toast } = useToast()
 
   useEffect(() => {
@@ -334,108 +333,103 @@ export default function CentraHomepage() {
       </section>
 
       <section className="py-24 px-6 bg-gradient-to-b from-background to-muted/10">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 leading-tight">
               Money is Failing Us.
             </h2>
           </div>
 
-          <div className="bg-card border border-border rounded-lg p-8 shadow-lg">
-            {/* Interactive tab buttons */}
-            <div className="flex flex-wrap gap-2 mb-8 p-1 bg-muted/50 rounded-lg">
-              <button
-                onClick={() => setActiveTab("inflation")}
-                className={`px-4 py-2 rounded-md text-sm transition-all duration-200 ${
-                  activeTab === "inflation"
-                    ? "bg-[#1C60FF] text-white shadow-sm"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background"
-                }`}
-              >
-                Inflation
-              </button>
-              <button
-                onClick={() => setActiveTab("manipulation")}
-                className={`px-4 py-2 rounded-md text-sm transition-all duration-200 ${
-                  activeTab === "manipulation"
-                    ? "bg-[#1C60FF] text-white shadow-sm"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background"
-                }`}
-              >
-                Political Control
-              </button>
-              <button
-                onClick={() => setActiveTab("exclusion")}
-                className={`px-4 py-2 rounded-md text-sm transition-all duration-200 ${
-                  activeTab === "exclusion"
-                    ? "bg-[#1C60FF] text-white shadow-sm"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background"
-                }`}
-              >
-                Financial Exclusion
-              </button>
-            </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Inflation Card */}
+            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <Image
+                  src="/person-looking-worried-at-financial-documents-infl.jpg"
+                  alt="Person concerned about inflation and rising costs"
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl text-foreground mb-4">Inflation</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Centra is the only currency designed for all people, worldwide. It can not be devalued, it can not be
+                  printed by entities for their own purposes; it can not be corrupted.
+                </p>
+              </div>
+            </Card>
 
-            {/* Tab content */}
-            <div className="min-h-[200px]">
-              {activeTab === "inflation" && (
-                <div className="animate-fade-in">
-                  <h3 className="text-2xl text-foreground mb-4">Your Money Loses Value Every Day</h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                    Central banks print unlimited money, devaluing your savings and eroding purchasing power. What cost
-                    $100 in 2000 now costs over $170 due to inflation.
-                  </p>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    Your hard-earned money becomes worth less while those closest to the money printer benefit most.
-                    This isn't an accident—it's by design.
-                  </p>
-                </div>
-              )}
+            {/* Political Control Card */}
+            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <Image
+                  src="/government-building-political-control-monetary-pol.jpg"
+                  alt="Government building representing political control over money"
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl text-foreground mb-4">Political Control</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Debt is no longer a trap. With Centra, borrowing is honest: a one-time flat fee instead of endless
+                  compounding interest. Credit becomes fair, predictable, and open to all.
+                </p>
+              </div>
+            </Card>
 
-              {activeTab === "manipulation" && (
-                <div className="animate-fade-in">
-                  <h3 className="text-2xl text-foreground mb-4">Politicians Control Your Financial Future</h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                    Monetary policy serves political interests, not people. Interest rates, money supply, and economic
-                    decisions are made behind closed doors by unelected officials.
-                  </p>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    Your financial freedom depends on the whims of politicians who have never experienced the
-                    consequences of their decisions on ordinary people.
-                  </p>
-                </div>
-              )}
+            {/* Financial Exclusion Card */}
+            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <Image
+                  src="/diverse-people-excluded-from-banking-financial-ser.jpg"
+                  alt="People excluded from traditional financial services"
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl text-foreground mb-4">Financial Exclusion</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Centra ends inflation, ends hidden taxation, and ends all barriers to access. Centra moves freely
+                  across borders in seconds, meaning every person holds equal power in the global economy.
+                </p>
+              </div>
+            </Card>
 
-              {activeTab === "exclusion" && (
-                <div className="animate-fade-in">
-                  <h3 className="text-2xl text-foreground mb-4">Billions Are Left Behind</h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                    Over 1.7 billion people lack access to basic banking services. Geographic borders, documentation
-                    requirements, and minimum balances exclude the world's most vulnerable.
-                  </p>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    The current financial system creates artificial barriers that prevent human prosperity and
-                    perpetuate inequality across the globe.
-                  </p>
-                </div>
-              )}
-            </div>
+            {/* Borders Card */}
+            <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <Image
+                  src="/global-community-borderless-currency-worldwide-fin.jpg"
+                  alt="Global community representing borderless financial freedom"
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl text-foreground mb-4">Borders</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Centra is not built by one founder or one company. Centra only exists based on demand and adoption of
+                  the people. Centra is money that belongs to you, community, and only the community can make it real.
+                </p>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
 
-      <section className="py-32 px-6" id="features-section">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-20">
-            <p className="text-sm text-muted-foreground mb-6 uppercase tracking-wider">Core Features</p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-10 leading-tight max-w-4xl mx-auto">
-              Money should serve people, not control them.
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-              Centra is built on three fundamental principles that ensure financial freedom and equality for everyone.
-            </p>
-          </div>
-
+      <section className="py-32 px-6 bg-gradient-to-b from-muted/20 to-muted/40" id="features-section">
+        <div className="max-w-5xl mx-auto text-center">
+          <h3 className="text-3xl text-foreground mb-6">Core Features</h3>
+          <p className="text-xl text-muted-foreground mb-12">
+            Centra is built on three fundamental principles that ensure financial freedom and equality for everyone.
+          </p>
           <div className="grid md:grid-cols-3 gap-10 mb-16">
             <Card className="border border-border bg-background hover:shadow-xl hover:scale-105 transition-all duration-300 text-center p-10 group">
               <div
@@ -444,10 +438,10 @@ export default function CentraHomepage() {
               >
                 <TrendingUp className="h-10 w-10 text-[#1C60FF]" />
               </div>
-              <CardTitle className="text-2xl text-foreground mb-6">Stability</CardTitle>
-              <CardDescription className="text-muted-foreground text-lg leading-relaxed">
+              <h4 className="text-2xl text-foreground mb-6">Stability</h4>
+              <p className="text-muted-foreground text-lg leading-relaxed">
                 Fixed supply, non-inflationary design ensures your money maintains its value over time.
-              </CardDescription>
+              </p>
             </Card>
 
             <Card className="border border-border bg-background hover:shadow-xl hover:scale-105 transition-all duration-300 text-center p-10 group">
@@ -457,10 +451,10 @@ export default function CentraHomepage() {
               >
                 <Eye className="h-10 w-10 text-[#1C60FF]" />
               </div>
-              <CardTitle className="text-2xl text-foreground mb-6">Transparency</CardTitle>
-              <CardDescription className="text-muted-foreground text-lg leading-relaxed">
+              <h4 className="text-2xl text-foreground mb-6">Transparency</h4>
+              <p className="text-muted-foreground text-lg leading-relaxed">
                 All transactions are visible and verifiable, eliminating corruption and hidden manipulation.
-              </CardDescription>
+              </p>
             </Card>
 
             <Card className="border border-border bg-background hover:shadow-xl hover:scale-105 transition-all duration-300 text-center p-10 group">
@@ -470,10 +464,10 @@ export default function CentraHomepage() {
               >
                 <Users className="h-10 w-10 text-[#1C60FF]" />
               </div>
-              <CardTitle className="text-2xl text-foreground mb-6">Equality</CardTitle>
-              <CardDescription className="text-muted-foreground text-lg leading-relaxed">
+              <h4 className="text-2xl text-foreground mb-6">Equality</h4>
+              <p className="text-muted-foreground text-lg leading-relaxed">
                 Accessible to everyone, regardless of location, status, or financial background.
-              </CardDescription>
+              </p>
             </Card>
           </div>
         </div>
