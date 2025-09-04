@@ -4,7 +4,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ArrowRight, Users, TrendingUp, Eye, Menu, X } from "lucide-react"
+import { ArrowRight, Eye, Menu, X, Shield, Globe, Smartphone, Check } from "lucide-react"
 import PersistentCTA from "@/components/PersistentCTA"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
@@ -15,6 +15,7 @@ export default function CentraHomepage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
   const { toast } = useToast()
+  const [activeTab, setActiveTab] = useState("stability")
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -510,51 +511,272 @@ export default function CentraHomepage() {
         </div>
       </section>
 
-      <section className="py-32 px-6 bg-gradient-to-b from-muted/20 to-muted/40" id="features-section">
-        <div className="max-w-5xl mx-auto text-center">
-          <h3 className="text-3xl text-foreground mb-6">Core Features</h3>
-          <p className="text-xl text-muted-foreground mb-12">
-            Centra is built on three fundamental principles that ensure financial freedom and equality for everyone.
-          </p>
-          <div className="grid md:grid-cols-3 gap-10 mb-16">
-            <Card className="border border-border bg-background hover:shadow-xl hover:scale-105 transition-all duration-300 text-center p-10 group">
-              <div
-                className="w-20 h-20 bg-gradient-to-br from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-300"
-                aria-hidden="true"
-              >
-                <TrendingUp className="h-10 w-10 text-[#1C60FF]" />
-              </div>
-              <h4 className="text-2xl text-foreground mb-6">Stability</h4>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                Fixed supply, non-inflationary design ensures your money maintains its value over time.
-              </p>
-            </Card>
+      <section className="py-24 px-6 bg-gradient-to-b from-muted/10 to-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 leading-tight">
+              Centra: Money, Reimagined.
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Highlights stability, transparency, borderlessness, inclusion - a revolutionary approach to currency that
+              serves people, not institutions.
+            </p>
+          </div>
 
-            <Card className="border border-border bg-background hover:shadow-xl hover:scale-105 transition-all duration-300 text-center p-10 group">
-              <div
-                className="w-20 h-20 bg-gradient-to-br from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-300"
-                aria-hidden="true"
-              >
+          {/* Icon-based layout showing each solution */}
+          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Shield className="h-10 w-10 text-[#1C60FF]" />
+              </div>
+              <h3 className="text-xl text-foreground mb-3 font-semibold">Stability</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Fixed supply ensures your money maintains its value over time, protected from inflation and
+                manipulation.
+              </p>
+            </div>
+
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Eye className="h-10 w-10 text-[#1C60FF]" />
               </div>
-              <h4 className="text-2xl text-foreground mb-6">Transparency</h4>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                All transactions are visible and verifiable, eliminating corruption and hidden manipulation.
+              <h3 className="text-xl text-foreground mb-3 font-semibold">Transparency</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                All transactions are visible and verifiable, eliminating corruption and hidden financial manipulation.
               </p>
-            </Card>
+            </div>
 
-            <Card className="border border-border bg-background hover:shadow-xl hover:scale-105 transition-all duration-300 text-center p-10 group">
-              <div
-                className="w-20 h-20 bg-gradient-to-br from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-300"
-                aria-hidden="true"
-              >
-                <Users className="h-10 w-10 text-[#1C60FF]" />
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Globe className="h-10 w-10 text-[#1C60FF]" />
               </div>
-              <h4 className="text-2xl text-foreground mb-6">Equality</h4>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                Accessible to everyone, regardless of location, status, or financial background.
+              <h3 className="text-xl text-foreground mb-3 font-semibold">Borderless</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Move money freely across borders in seconds, giving everyone equal power in the global economy.
               </p>
-            </Card>
+            </div>
+
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Smartphone className="h-10 w-10 text-[#1C60FF]" />
+              </div>
+              <h3 className="text-xl text-foreground mb-3 font-semibold">Inclusion</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Accessible to everyone, regardless of location, status, or financial background - true financial
+                equality.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-32 px-6 bg-gradient-to-b from-background to-muted/20" id="features-section">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl text-foreground mb-8 leading-tight">Built on Fundamental Principles</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Centra is built on three fundamental principles that ensure financial freedom and equality for everyone.
+            </p>
+          </div>
+
+          {/* Tabbed Interface */}
+          <div className="bg-background border border-border rounded-2xl overflow-hidden shadow-xl">
+            {/* Tab Navigation */}
+            <div className="flex border-b border-border">
+              <button
+                onClick={() => setActiveTab("stability")}
+                className={`flex-1 px-6 py-4 text-sm font-medium transition-colors duration-200 ${
+                  activeTab === "stability"
+                    ? "bg-[#1C60FF] text-white"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted/70"
+                }`}
+              >
+                STABILITY
+              </button>
+              <button
+                onClick={() => setActiveTab("transparency")}
+                className={`flex-1 px-6 py-4 text-sm font-medium transition-colors duration-200 ${
+                  activeTab === "transparency"
+                    ? "bg-[#1C60FF] text-white"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted/70"
+                }`}
+              >
+                TRANSPARENCY
+              </button>
+              <button
+                onClick={() => setActiveTab("equality")}
+                className={`flex-1 px-6 py-4 text-sm font-medium transition-colors duration-200 ${
+                  activeTab === "equality"
+                    ? "bg-[#1C60FF] text-white"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted/70"
+                }`}
+              >
+                EQUALITY
+              </button>
+            </div>
+
+            {/* Tab Content */}
+            <div className="p-12">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  {activeTab === "stability" && (
+                    <div className="space-y-6">
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">
+                            Fixed supply, non-inflationary design
+                          </h4>
+                          <p className="text-muted-foreground">
+                            Ensures your money maintains its value over time with mathematical certainty.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Protected from manipulation</h4>
+                          <p className="text-muted-foreground">
+                            Cannot be printed or devalued by any entity for their own purposes.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Predictable monetary policy</h4>
+                          <p className="text-muted-foreground">
+                            Clear rules that cannot be changed arbitrarily by central authorities.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === "transparency" && (
+                    <div className="space-y-6">
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">
+                            All transactions visible and verifiable
+                          </h4>
+                          <p className="text-muted-foreground">
+                            Complete transparency eliminates corruption and hidden manipulation.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Open-source and auditable</h4>
+                          <p className="text-muted-foreground">
+                            Every line of code can be reviewed and verified by the community.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Real-time monitoring</h4>
+                          <p className="text-muted-foreground">
+                            Track all network activity and monetary policy in real-time.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === "equality" && (
+                    <div className="space-y-6">
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">
+                            Accessible to everyone, everywhere
+                          </h4>
+                          <p className="text-muted-foreground">
+                            Regardless of location, status, or financial background.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">No barriers to entry</h4>
+                          <p className="text-muted-foreground">
+                            No minimum balances, credit checks, or institutional gatekeepers.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Equal power in global economy</h4>
+                          <p className="text-muted-foreground">
+                            Every person holds the same rights and capabilities with their money.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right side - Mobile mockup placeholder */}
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <div className="w-64 h-96 bg-gradient-to-br from-[#1C60FF]/10 to-[#1C60FF]/20 rounded-3xl border border-[#1C60FF]/20 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-16 h-16 bg-[#1C60FF]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <Image src="/centra-icon.png" alt="Centra" width={32} height={32} className="opacity-80" />
+                        </div>
+                        <p className="text-[#1C60FF] text-sm font-medium">Centra Mobile</p>
+                        <p className="text-[#1C60FF]/60 text-xs mt-1">Coming Soon</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+                <Button
+                  size="lg"
+                  onClick={() => {
+                    const problemSection = document.querySelector('section:has(h2:contains("Money is Failing Us"))')
+                    problemSection?.scrollIntoView({ behavior: "smooth" })
+                  }}
+                  className="bg-[#1C60FF] text-white hover:bg-[#1C60FF]/90 hover:scale-105 px-8 py-3 transition-all duration-300"
+                >
+                  See How Centra Fixes This
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-[#1C60FF] text-[#1C60FF] hover:bg-[#1C60FF]/10 px-8 py-3 transition-all duration-300 bg-transparent"
+                >
+                  Learn How Centra Works
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
