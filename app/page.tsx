@@ -768,7 +768,7 @@ export default function CentraHomepage() {
                   size="lg"
                   variant="outline"
                   onClick={() => {
-                    window.location.href = "/developer-hub"
+                    window.location.href = "/developers"
                   }}
                   className="border-[#1C60FF] text-[#1C60FF] hover:bg-[#1C60FF]/10 px-8 py-3 transition-all duration-300 bg-transparent"
                 >
