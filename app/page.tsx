@@ -4,7 +4,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ArrowRight, Eye, Menu, X, Shield, Globe, Smartphone, Check } from "lucide-react"
+import { ArrowRight, Eye, Menu, X, Shield, Globe, Smartphone, Check, ArrowDown } from "lucide-react"
 import PersistentCTA from "@/components/PersistentCTA"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
@@ -511,6 +511,117 @@ export default function CentraHomepage() {
         </div>
       </section>
 
+      <section className="py-32 px-6 bg-gradient-to-b from-background to-muted/20" id="why-now-section">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left side - Content */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-4xl md:text-5xl text-foreground mb-8 leading-tight">The Time for Change is Now.</h2>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-3 h-3 bg-[#1C60FF] rounded-full mt-2 flex-shrink-0" />
+                    <p className="text-xl text-foreground leading-relaxed">
+                      <strong>Centra is different; it never loses value.</strong>
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-3 h-3 bg-[#1C60FF] rounded-full mt-2 flex-shrink-0" />
+                    <p className="text-xl text-foreground leading-relaxed">
+                      <strong>What you hold today keeps its worth tomorrow.</strong>
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-3 h-3 bg-[#1C60FF] rounded-full mt-2 flex-shrink-0" />
+                    <p className="text-xl text-foreground leading-relaxed">
+                      <strong>Borrowing is no longer a punishment.</strong>
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-3 h-3 bg-[#1C60FF] rounded-full mt-2 flex-shrink-0" />
+                    <p className="text-xl text-foreground leading-relaxed">
+                      <strong>With Centra, credit is honest, a simple flat fee instead of compounding interest.</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <div className="pt-8">
+                <Button
+                  size="lg"
+                  onClick={() => {
+                    const newsletterSection = document.getElementById("newsletter-section")
+                    newsletterSection?.scrollIntoView({ behavior: "smooth" })
+                  }}
+                  className="bg-[#1C60FF] text-white hover:bg-[#1C60FF]/90 hover:scale-105 px-8 py-4 text-lg transition-all duration-300 shadow-lg"
+                >
+                  Be Early. Be Part of History.
+                </Button>
+              </div>
+            </div>
+
+            {/* Right side - Animation/Visual */}
+            <div className="flex justify-center">
+              <div className="relative w-full max-w-md">
+                <div className="bg-gradient-to-br from-muted/50 to-muted/80 rounded-3xl p-8 shadow-xl">
+                  <div className="space-y-6">
+                    {/* Fiat Failures */}
+                    <div className="flex items-center gap-4 p-4 bg-red-50 dark:bg-red-950/20 rounded-2xl border border-red-200 dark:border-red-800">
+                      <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+                        <span className="text-2xl">📉</span>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-red-700 dark:text-red-300">Fiat Failures</p>
+                        <p className="text-xs text-red-600 dark:text-red-400">Inflation • Manipulation • Exclusion</p>
+                      </div>
+                    </div>
+
+                    {/* Arrow Down */}
+                    <div className="flex justify-center">
+                      <ArrowDown className="h-8 w-8 text-muted-foreground animate-bounce" />
+                    </div>
+
+                    {/* Blockchain Innovation */}
+                    <div className="flex items-center gap-4 p-4 bg-blue-50 dark:bg-blue-950/20 rounded-2xl border border-blue-200 dark:border-blue-800">
+                      <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                        <span className="text-2xl">⛓️</span>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-blue-700 dark:text-blue-300">Blockchain Innovation</p>
+                        <p className="text-xs text-blue-600 dark:text-blue-400">Transparency • Decentralization</p>
+                      </div>
+                    </div>
+
+                    {/* Arrow Down */}
+                    <div className="flex justify-center">
+                      <ArrowDown className="h-8 w-8 text-muted-foreground animate-bounce" />
+                    </div>
+
+                    {/* Centra Launch */}
+                    <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-[#1C60FF]/10 to-[#1C60FF]/20 rounded-2xl border border-[#1C60FF]/30">
+                      <div className="w-12 h-12 bg-[#1C60FF]/20 rounded-full flex items-center justify-center">
+                        <Image
+                          src="/centra-icon.png"
+                          alt="Centra"
+                          width={24}
+                          height={24}
+                          className="hover:scale-110 transition-transform duration-200"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-[#1C60FF]">Centra Launch</p>
+                        <p className="text-xs text-[#1C60FF]/80">The Future of Money</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-6 bg-gradient-to-b from-muted/10 to-background">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -768,7 +879,7 @@ export default function CentraHomepage() {
                   size="lg"
                   variant="outline"
                   onClick={() => {
-                    window.location.href = "/developers"
+                    window.location.href = "/developer-hub"
                   }}
                   className="border-[#1C60FF] text-[#1C60FF] hover:bg-[#1C60FF]/10 px-8 py-3 transition-all duration-300 bg-transparent"
                 >
@@ -865,7 +976,7 @@ export default function CentraHomepage() {
 
         <div className="max-w-6xl mx-auto px-6 pt-32">
           <div className="text-center mb-16">
-            <h3 className="text-4xl md:text-5xl text-foreground mb-6">What Fiat Can Never Offer</h3>
+            <h3 className="text-4xl md:text-5xl text-foreground mb-6">The Financial Revolution</h3>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Compare the limitations of traditional fiat currency with Centra's innovative solutions for a better
               financial future.
@@ -968,7 +1079,7 @@ export default function CentraHomepage() {
               onClick={scrollToNewsletter}
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 h-14 px-8 text-lg transition-all duration-300 shadow-lg"
             >
-              Compare the Future 
+              Join the Financial Revolution
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
