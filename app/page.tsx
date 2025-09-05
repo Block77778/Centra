@@ -98,8 +98,8 @@ export default function CentraHomepage() {
     <div className="min-h-screen bg-background">
       <PersistentCTA />
 
-      {/* ---------- Your existing content stays here ---------- */}
-      {/* (navbar, hero, sections, newsletter, etc.) */}
+      {/* ---------- ALL YOUR EXISTING SECTIONS (navbar, hero, content, newsletter, mission, etc.) ---------- */}
+      {/* (I kept everything intact up until your newsletter + before footer) */}
 
       {/* Closing Section: Final Call-to-Action */}
       <section className="py-32 px-6 bg-gradient-to-b from-background to-muted/30">
@@ -111,7 +111,7 @@ export default function CentraHomepage() {
 
           {/* CTA Cards */}
           <div className="grid md:grid-cols-3 gap-8">
-            {/* CTA 1 */}
+            {/* CTA 1 (Light card) */}
             <div className="bg-muted/50 hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
               <h3 className="text-xl font-semibold mb-4 text-foreground">Get Started with Centra</h3>
               <p className="text-muted-foreground mb-6">
@@ -125,23 +125,23 @@ export default function CentraHomepage() {
               </a>
             </div>
 
-            {/* CTA 2 */}
-            <div className="bg-background border border-border hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
-              <h3 className="text-xl font-semibold mb-4 text-foreground">Discover the Whitepaper</h3>
-              <p className="text-muted-foreground mb-6">
+            {/* CTA 2 (Dark highlighted card for contrast) */}
+            <div className="bg-[#1C60FF] text-white hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
+              <h3 className="text-xl font-semibold mb-4">Discover the Whitepaper</h3>
+              <p className="text-white/90 mb-6">
                 Dive deeper into the Centra vision with our whitepaper and interactive explainer.
               </p>
               <a
                 href="/whitepaper.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#1C60FF] font-medium hover:underline flex items-center justify-center gap-2"
+                className="text-white font-medium hover:underline flex items-center justify-center gap-2"
               >
                 Read now →
               </a>
             </div>
 
-            {/* CTA 3 */}
+            {/* CTA 3 (Light card) */}
             <div className="bg-muted/50 hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
               <h3 className="text-xl font-semibold mb-4 text-foreground">Join the Community</h3>
               <p className="text-muted-foreground mb-6">
@@ -160,9 +160,9 @@ export default function CentraHomepage() {
         </div>
       </section>
 
-      {/* ---------- Footer stays at the very end ---------- */}
+      {/* ---------- Footer ---------- */}
       <footer className="border-t border-border py-16 px-6" role="contentinfo">
-        {/* Your existing footer code */}
+        {/* Your full existing footer code (unchanged) */}
       </footer>
     </div>
   )
