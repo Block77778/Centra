@@ -216,7 +216,6 @@ export default function CentraHomepage() {
               </Button>
             </div>
           </div>
-
           {mobileMenuOpen && (
             <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
               <div className="px-2 pt-2 pb-3 space-y-1">
@@ -824,7 +823,6 @@ export default function CentraHomepage() {
                   <p className="text-muted-foreground">Current system limitations</p>
                 </div>
               </div>
-
               <div className="space-y-6">
                 {[
                   {
@@ -871,7 +869,6 @@ export default function CentraHomepage() {
                   <p className="text-[#1C60FF]/80">Revolutionary improvements</p>
                 </div>
               </div>
-
               <div className="space-y-6">
                 {[
                   {
@@ -1056,7 +1053,6 @@ export default function CentraHomepage() {
               <span className="text-[#1C60FF]">One Future.</span>
             </h2>
           </div>
-
           <div className="max-w-3xl mx-auto space-y-6 text-lg md:text-xl leading-relaxed text-white/90 mb-12">
             <p>
               Centra was founded because money should serve people, not trap them. For too long we have lived in a
@@ -1071,7 +1067,6 @@ export default function CentraHomepage() {
               people. Centra is money that belongs to you, community, and only the community can make it real.
             </p>
           </div>
-
           <Button
             size="lg"
             onClick={() => {
@@ -1083,6 +1078,65 @@ export default function CentraHomepage() {
             Join the Movement
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
+        </div>
+      </section>
+
+      {/* Closing Section: Final Call-to-Action */}
+      <section className="py-32 px-6 bg-gradient-to-b from-background to-muted/30">
+        <div className="max-w-6xl mx-auto text-center">
+          {/* Bold Statement */}
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-12">
+            Centra isn't coming. It's here. <br />And it belongs to the world.
+          </h2>
+
+          {/* CTA Cards */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* CTA 1 */}
+            <div className="bg-muted/50 hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
+              <h3 className="text-xl font-semibold mb-4 text-foreground">Get Started with Centra</h3>
+              <p className="text-muted-foreground mb-6">
+                Download the Centra wallet app and start your journey today.
+              </p>
+              <a
+                href="/download"
+                className="text-[#1C60FF] font-medium hover:underline flex items-center justify-center gap-2"
+              >
+                Get started →
+              </a>
+            </div>
+
+            {/* CTA 2 */}
+            <div className="bg-background border border-border hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
+              <h3 className="text-xl font-semibold mb-4 text-foreground">Discover the Whitepaper</h3>
+              <p className="text-muted-foreground mb-6">
+                Dive deeper into the Centra vision with our whitepaper and interactive explainer.
+              </p>
+              <a
+                href="/whitepaper.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#1C60FF] font-medium hover:underline flex items-center justify-center gap-2"
+              >
+                Read now →
+              </a>
+            </div>
+
+            {/* CTA 3 */}
+            <div className="bg-muted/50 hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
+              <h3 className="text-xl font-semibold mb-4 text-foreground">Join the Community</h3>
+              <p className="text-muted-foreground mb-6">
+                Be part of the movement. Connect with Centra believers worldwide.
+              </p>
+              <a
+                href="https://discord.gg/yourcommunity"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#1C60FF] font-medium hover:underline flex items-center justify-center gap-2"
+              >
+                Join now →
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1131,7 +1185,6 @@ export default function CentraHomepage() {
               className="hover:scale-105 transition-transform duration-200"
             />
           </div>
-
           <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
             <div>
               <h4 className="text-foreground mb-4">Centra ID</h4>
@@ -1311,7 +1364,6 @@ export default function CentraHomepage() {
               </nav>
             </div>
           </div>
-
           <div className="border-t border-border pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="text-sm text-muted-foreground mb-4 md:mb-0">© 2024 Centra. All rights reserved.</div>
