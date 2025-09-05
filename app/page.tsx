@@ -805,7 +805,7 @@ export default function CentraHomepage() {
 
         <div className="max-w-6xl mx-auto px-6 pt-32">
           <div className="text-center mb-16">
-            <h3 className="text-4xl md:text-5xl text-foreground mb-6">The Financial Revolution</h3>
+            <h3 className="text-4xl md:text-5xl text-foreground mb-6">What Fiat Can Never Offer</h3>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Compare the limitations of traditional fiat currency with Centra's innovative solutions for a better
               financial future.
@@ -906,7 +906,7 @@ export default function CentraHomepage() {
               onClick={scrollToNewsletter}
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 h-14 px-8 text-lg transition-all duration-300 shadow-lg"
             >
-              Join the Financial Revolution
+              Compare the Future 
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
