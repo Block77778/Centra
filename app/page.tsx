@@ -1009,7 +1009,7 @@ export default function CentraHomepage() {
                 {/* Centra Launch */}
                 <div className="bg-[#1C60FF] border border-[#1C60FF] rounded-2xl p-6 shadow-sm">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
                       <Image
                         src="/centra-icon.png"
                         alt="Centra"
