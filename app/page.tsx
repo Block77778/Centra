@@ -708,7 +708,7 @@ export default function CentraHomepage() {
                   size="lg"
                   variant="outline"
                   onClick={() => {
-                    window.location.href = "/developer-hub"
+                    window.location.href = "/developers"
                   }}
                   className="border-[#1C60FF] text-[#1C60FF] hover:bg-[#1C60FF]/10 px-8 py-3 transition-all duration-300 bg-transparent"
                 >
@@ -1034,7 +1034,7 @@ export default function CentraHomepage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/global-community-connected-digitally-worldwide-financ.jpg"
+            src="/global-community-borderless-currency-worldwide-fin.jpg"
             alt="Global community connected digitally representing worldwide financial inclusion"
             width={1920}
             height={1080}
