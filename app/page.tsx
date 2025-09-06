@@ -143,47 +143,47 @@ export default function CentraHomepage() {
                   className="hover:scale-110 transition-transform duration-200"
                 />
               </div>
-              <div className="hidden md:flex items-center space-x-6 text-sm">
+              <div className="hidden md:flex items-center space-x-4 text-sm">
                 <a
                   href="/about"
-                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200"
+                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200 whitespace-nowrap"
                 >
                   Learn about Centra
                 </a>
                 <a
                   href="#"
                   onClick={scrollToNewsletter}
-                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200"
+                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200 whitespace-nowrap"
                 >
                   Buy Centra
                 </a>
                 <a
                   href="/team"
-                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200"
+                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200 whitespace-nowrap"
                 >
                   Meet the Team
                 </a>
                 <a
                   href="/developers"
-                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200"
+                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200 whitespace-nowrap"
                 >
                   Developer Hub
                 </a>
                 <a
                   href="/community"
-                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200"
+                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200 whitespace-nowrap"
                 >
                   Community
                 </a>
                 <a
                   href="/faq"
-                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200"
+                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200 whitespace-nowrap"
                 >
                   FAQs
                 </a>
                 <a
                   href="/blog"
-                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200"
+                  className="text-foreground hover:text-[#1C60FF] focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded px-3 py-2 transition-all duration-200 whitespace-nowrap"
                 >
                   Blog
                 </a>
@@ -194,7 +194,7 @@ export default function CentraHomepage() {
                 variant="outline"
                 size="sm"
                 onClick={scrollToNewsletter}
-                className="text-sm bg-transparent hover:bg-[#1C60FF]/10 hover:border-[#1C60FF] transition-all duration-200 flex items-center gap-2"
+                className="text-sm bg-transparent hover:bg-[#1C60FF]/10 hover:border-[#1C60FF] transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
               >
                 <Image
                   src="/centra-icon.png"
@@ -489,7 +489,7 @@ export default function CentraHomepage() {
               <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl flex-shrink-0 w-80 snap-start group">
                 <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
                   <Image
-                    src="/global-business-professionals-collaborating-across.jpg"
+                    src="/global-business-profersonals-collaborating-across.jpg"
                     alt="Global professionals collaborating on borderless financial solutions"
                     width={320}
                     height={240}
@@ -971,14 +971,14 @@ export default function CentraHomepage() {
             <div className="flex justify-center">
               <div className="w-full max-w-sm space-y-6">
                 {/* Fiat Failures */}
-                <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-2xl p-6 shadow-sm">
+                <div className="bg-background border border-border rounded-2xl p-6 shadow-sm">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center">
-                      <TrendingDown className="h-6 w-6 text-red-600 dark:text-red-400" />
+                    <div className="w-12 h-12 bg-muted rounded-xl flex items-center justify-center">
+                      <TrendingDown className="h-6 w-6 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-red-700 dark:text-red-300">Fiat Failures</h3>
-                      <p className="text-sm text-red-600 dark:text-red-400">Inflation • Manipulation • Exclusion</p>
+                      <h3 className="text-lg font-semibold text-foreground">Fiat Failures</h3>
+                      <p className="text-sm text-muted-foreground">Inflation • Manipulation • Exclusion</p>
                     </div>
                   </div>
                 </div>
@@ -989,14 +989,14 @@ export default function CentraHomepage() {
                 </div>
 
                 {/* Blockchain Innovation */}
-                <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-6 shadow-sm">
+                <div className="bg-background border border-border rounded-2xl p-6 shadow-sm">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
-                      <Blocks className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                    <div className="w-12 h-12 bg-muted rounded-xl flex items-center justify-center">
+                      <Blocks className="h-6 w-6 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-blue-700 dark:text-blue-300">Blockchain Innovation</h3>
-                      <p className="text-sm text-blue-600 dark:text-blue-400">Transparency • Decentralization</p>
+                      <h3 className="text-lg font-semibold text-foreground">Blockchain Innovation</h3>
+                      <p className="text-sm text-muted-foreground">Transparency • Decentralization</p>
                     </div>
                   </div>
                 </div>
@@ -1007,9 +1007,9 @@ export default function CentraHomepage() {
                 </div>
 
                 {/* Centra Launch */}
-                <div className="bg-gradient-to-r from-[#1C60FF]/10 to-[#1C60FF]/20 border border-[#1C60FF]/30 rounded-2xl p-6 shadow-sm">
+                <div className="bg-[#1C60FF] border border-[#1C60FF] rounded-2xl p-6 shadow-sm">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-[#1C60FF]/20 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
                       <Image
                         src="/centra-icon.png"
                         alt="Centra"
@@ -1019,8 +1019,8 @@ export default function CentraHomepage() {
                       />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-[#1C60FF]">Centra Launch</h3>
-                      <p className="text-sm text-[#1C60FF]/80">The Future of Money</p>
+                      <h3 className="text-lg font-semibold text-white">Centra Launch</h3>
+                      <p className="text-sm text-white/80">The Future of Money</p>
                     </div>
                   </div>
                 </div>
@@ -1185,36 +1185,7 @@ export default function CentraHomepage() {
               className="hover:scale-105 transition-transform duration-200"
             />
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
-            <div>
-              <h4 className="text-foreground mb-4">Centra ID</h4>
-              <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Centra ID links">
-                <div>
-                  <a
-                    href="/centra-id"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Overview
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="/privacy"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Privacy
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="/security"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Security
-                  </a>
-                </div>
-              </nav>
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             <div>
               <h4 className="text-foreground mb-4">Centra App</h4>
               <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Centra App links">
@@ -1245,35 +1216,6 @@ export default function CentraHomepage() {
               </nav>
             </div>
             <div>
-              <h4 className="text-foreground mb-4">Centracoin</h4>
-              <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Centracoin links">
-                <div>
-                  <a
-                    href="/tokenomics"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Tokenomics
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="/distribution"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Distribution
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="/grants"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Grants
-                  </a>
-                </div>
-              </nav>
-            </div>
-            <div>
               <h4 className="text-foreground mb-4">Developers</h4>
               <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Developers links">
                 <div>
@@ -1290,17 +1232,6 @@ export default function CentraHomepage() {
                     className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
                   >
                     API
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="https://github.com/centra"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                    aria-label="Follow us on X (Twitter)"
-                  >
-                    X (Twitter)
                   </a>
                 </div>
               </nav>
@@ -1324,14 +1255,6 @@ export default function CentraHomepage() {
                     Blog
                   </a>
                 </div>
-                <div>
-                  <a
-                    href="/careers"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Careers
-                  </a>
-                </div>
               </nav>
             </div>
             <div>
@@ -1351,14 +1274,6 @@ export default function CentraHomepage() {
                     className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
                   >
                     Privacy
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="/cookies"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Cookies
                   </a>
                 </div>
               </nav>
@@ -1406,7 +1321,7 @@ export default function CentraHomepage() {
                 </a>
               </nav>
             </div>
-            </div>
+          </div>
         </div>
       </footer>
     </div>
