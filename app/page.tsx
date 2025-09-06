@@ -903,10 +903,10 @@ export default function CentraHomepage() {
           <div className="text-center mt-12">
             <Button
               size="lg"
-              onClick={scrollToNewsletter}
+              onClick={() => window.open('/explainer', '_blank')}
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 h-14 px-8 text-lg transition-all duration-300 shadow-lg"
             >
-              Compare the Future 
+              Compare the Future
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
@@ -1034,7 +1034,7 @@ export default function CentraHomepage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/global-community-borderless-currency-worldwide-fin.jpg"
+            src="/global-community-connected-digitally-worldwide-financ.jpg"
             alt="Global community connected digitally representing worldwide financial inclusion"
             width={1920}
             height={1080}
@@ -1406,7 +1406,7 @@ export default function CentraHomepage() {
                 </a>
               </nav>
             </div>
-          </div>
+            </div>
         </div>
       </footer>
     </div>
