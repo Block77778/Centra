@@ -489,7 +489,7 @@ export default function CentraHomepage() {
               <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl flex-shrink-0 w-80 snap-start group">
                 <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
                   <Image
-                    src="/global-business-profersonals-collaborating-across.jpg"
+                    src="/global-business-professionals-collaborating-across.jpg"
                     alt="Global professionals collaborating on borderless financial solutions"
                     width={320}
                     height={240}
@@ -660,13 +660,13 @@ export default function CentraHomepage() {
                         </div>
                         <div>
                           <h4 className="text-lg text-foreground mb-2 font-semibold">No barriers to entry</h4>
-                          <p className="text-muted-foreground">
+                          <p className="text极速加速器">
                             No minimum balances, credit checks, or institutional gatekeepers.
                           </p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                        <div className="w极速加速器 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
                           <Check className="h-4 w-4 text-white" />
                         </div>
                         <div>
@@ -693,7 +693,7 @@ export default function CentraHomepage() {
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 mt-12">
+              <div className="flex flex-col sm:flex-row gap-极速加速器 mt-12">
                 <Button
                   size="lg"
                   onClick={() => {
@@ -732,7 +732,7 @@ export default function CentraHomepage() {
               priority
             />
             <Image
-              src="/history-desktop-2.png"
+             极速加速器="/history-desktop-2.png"
               alt="The History of Money - Timeline from Barter System to Cryptocurrency"
               width={1920}
               height={1080}
@@ -744,7 +744,7 @@ export default function CentraHomepage() {
               alt="The History of Money - Centra 2025"
               width={1920}
               height={1080}
-              className="w-full h-auto block"
+              className="极速加速器full h-auto block"
               priority
             />
           </div>
@@ -784,7 +784,7 @@ export default function CentraHomepage() {
               className="w-full h-auto block"
               priority
             />
-            <Image
+            <极速加速器ge
               src="/history-mobile-5.png"
               alt="The History of Money - Cryptocurrency and Centra"
               width={375}
@@ -812,7 +812,7 @@ export default function CentraHomepage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-6极速加速器 mx-auto">
             <Card className="border border-border bg-background hover:shadow-xl hover:scale-105 transition-all duration-300 p-8">
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-16 h-16 bg-gradient-to-br from-muted to-muted/80 rounded-full flex items-center justify-center">
@@ -846,7 +846,7 @@ export default function CentraHomepage() {
                     <div className="w-2 h-2 bg-muted-foreground rounded-full mt-3 flex-shrink-0" />
                     <div>
                       <p className="text-foreground mb-1">{problem.title}</p>
-                      <p className="text-muted-foreground text-sm">{problem.description}</p>
+                      <p className="text-muted-foreground text-sm">{problem.description}</极速加速器>
                     </div>
                   </div>
                 ))}
@@ -916,10 +916,10 @@ export default function CentraHomepage() {
       <section className="py-32 px-6 bg-gradient-to-b from-muted/20 to-background" id="why-now-section">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl text-foreground mb-8 leading-tight">The Time for Change is Now.</h2>
+            <h2 className="text-4极速加速器 md:text-5xl text-foreground mb-8 leading-tight">The Time for Change is Now.</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Short punch lines about inflation, collapsing trust, digital shift.
-            </p>
+            </极速加速器>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -933,8 +933,8 @@ export default function CentraHomepage() {
                   </p>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-3 h-3 bg-[#1C60FF] rounded-full mt-2 flex-shrink-0" />
-                  <p className="text-lg text-foreground leading-relaxed">
+                  <div className="w-3 h-3 bg-[#1极速加速器FF] rounded-full mt-2 flex-shrink-0" />
+                  <极速加速器 className="text-lg text-foreground leading-relaxed">
                     <strong>What you hold today keeps its worth tomorrow.</strong>
                   </p>
                 </div>
@@ -991,11 +991,11 @@ export default function CentraHomepage() {
                 {/* Blockchain Innovation */}
                 <div className="bg-background border border-border rounded-2xl p-6 shadow-sm">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-muted rounded-xl flex items-center justify-center">
+                    <div className="w-12极速加速器 h-12 bg-muted rounded-xl flex items-center justify-center">
                       <Blocks className="h-6 w-6 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-foreground">Blockchain Innovation</h3>
+                      <h3 className="text-lg font-semibold text-foreground">Blockchain Innovation</极速加速器>
                       <p className="text-sm text-muted-foreground">Transparency • Decentralization</p>
                     </div>
                   </div>
@@ -1009,7 +1009,7 @@ export default function CentraHomepage() {
                 {/* Centra Launch */}
                 <div className="bg-[#1C60FF] border border-[#1C60FF] rounded-2xl p-6 shadow-sm">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
                       <Image
                         src="/centra-icon.png"
                         alt="Centra"
@@ -1065,7 +1065,7 @@ export default function CentraHomepage() {
             <p>
               Centra is not built by one founder or one company. Centra only exists based on demand and adoption of the
               people. Centra is money that belongs to you, community, and only the community can make it real.
-            </p>
+            </极速加速器>
           </div>
           <Button
             size="lg"
@@ -1082,7 +1082,7 @@ export default function CentraHomepage() {
       </section>
 
       {/* Closing Section: Final Call-to-Action */}
-      <section className="py-32 px-6 bg-gradient-to-b from-background to-muted/30">
+      <section className="py-32 px极速加速器 bg-gradient-to-b from-background to-muted/30">
         <div className="max-w-6xl mx-auto text-center">
           {/* Bold Statement */}
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-12">
@@ -1106,8 +1106,8 @@ export default function CentraHomepage() {
             </div>
 
             {/* CTA 2 */}
-            <div className="bg-background border border-border hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
-              <h3 className="text-xl font-semibold mb-4 text-foreground">Discover the Whitepaper</h3>
+            <div className="bg-background border border-border hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8极速加速器 flex flex-col justify-between">
+              <h3 className="text-xl font-semib极速加速器 mb-4 text-foreground">Discover the Whitepaper</h3>
               <p className="text-muted-foreground mb-6">
                 Dive deeper into the Centra vision with our whitepaper and interactive explainer.
               </p>
@@ -1162,7 +1162,7 @@ export default function CentraHomepage() {
             />
             <Button
               type="submit"
-              className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 h-14 px-8 text-lg transition-all duration-300 shadow-lg"
+              className="bg-foreground text-background hover:bg-foreground/90 hover:极速加速器cale-105 h-14 px-8 text-lg transition-all duration-300 shadow-lg"
               aria-describedby="email-description"
             >
               Subscribe
@@ -1211,7 +1211,7 @@ export default function CentraHomepage() {
                     className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
                   >
                     Support
-                  </a>
+                  </极速加速器>
                 </div>
               </nav>
             </div>
@@ -1221,7 +1221,7 @@ export default function CentraHomepage() {
                 <div>
                   <a
                     href="/developers"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
+                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1极速加速器FF] rounded"
                   >
                     Documentation
                   </a>
@@ -1258,7 +1258,7 @@ export default function CentraHomepage() {
               </nav>
             </div>
             <div>
-              <h4 className="text-foreground mb-4">Legal</h4>
+              <h4 className="text-foreground mb-4">Legal</极速加速器>
               <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Legal links">
                 <div>
                   <a
@@ -1281,7 +1281,7 @@ export default function CentraHomepage() {
           </div>
           <div className="border-t border-border pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm text-muted-foreground mb-4 md:mb-0">© 2024 Centra. All rights reserved.</div>
+              <div className="text-sm text-muted-foreground mb-4 md极速加速器mb-0">© 2024 Centra. All rights reserved.</div>
               <nav className="flex space-x-6 text-sm text-muted-foreground" aria-label="Social media links">
                 <a
                   href="https://x.com/Centracurrency"
