@@ -555,150 +555,142 @@ export default function CentraHomepage() {
               </button>
             </div>
 
-            {/* Tab Content */} 
-<div className="p-12">
-  <div className="grid lg:grid-cols-2 gap-12 items-center">
-    <div>
-      {activeTab === "stability" && (
-        <div className="space-y-6">
-          <div className="flex items-start gap-3">
-            <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-              <Check className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h4 className="text-lg text-foreground mb-2 font-semibold">
-                Fixed supply, non-inflationary design
-              </h4>
-              <p className="text-muted-foreground">
-                Ensures your money maintains its value over time with mathematical certainty.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-              <Check className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h4 className="text-lg text-foreground mb-2 font-semibold">Protected from manipulation</h4>
-              <p className="text-muted-foreground">
-                Cannot be printed or devalued by any entity for their own purposes.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-              <Check className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h4 className="text-lg text-foreground mb-2 font-semibold">Predictable monetary policy</h4>
-              <p className="text-muted-foreground">
-                Clear rules that cannot be changed arbitrarily by central authorities.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+            {/* Tab Content */}
+            <div className="p-12">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  {activeTab === "stability" && (
+                    <div className="space-y-6">
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">
+                            Fixed supply, non-inflationary design
+                          </h4>
+                          <p className="text-muted-foreground">
+                            Ensures your money maintains its value over time with mathematical certainty.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Protected from manipulation</h4>
+                          <p className="text-muted-foreground">
+                            Cannot be printed or devalued by any entity for their own purposes.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Predictable monetary policy</h4>
+                          <p className="text-muted-foreground">
+                            Clear rules that cannot be changed arbitrarily by central authorities.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-      {activeTab === "transparency" && (
-        <div className="space-y-6">
-          <div className="flex items-start gap-3">
-            <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-              <Check className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h4 className="text-lg text-foreground mb-2 font-semibold">
-                All transactions visible and verifiable
-              </h4>
-              <p className="text-muted-foreground">
-                Complete transparency eliminates corruption and hidden manipulation.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-              <Check className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h4 className="text-lg text-foreground mb-2 font-semibold">Open-source and auditable</h4>
-              <p className="text-muted-foreground">
-                Every line of code can be reviewed and verified by the community.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-              <Check className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h4 className="text-lg text-foreground mb-2 font-semibold">Real-time monitoring</h4>
-              <p className="text-muted-foreground">
-                Track all network activity and monetary policy in real-time.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+                  {activeTab === "transparency" && (
+                    <div className="space-y-6">
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">
+                            All transactions visible and verifiable
+                          </h4>
+                          <p className="text-muted-foreground">
+                            Complete transparency eliminates corruption and hidden manipulation.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Open-source and auditable</h4>
+                          <p className="text-muted-foreground">
+                            Every line of code can be reviewed and verified by the community.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Real-time monitoring</h4>
+                          <p className="text-muted-foreground">
+                            Track all network activity and monetary policy in real-time.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-      {activeTab === "equality" && (
-        <div className="space-y-6">
-          <div className="flex items-start gap-3">
-            <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-              <Check className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h4 className="text-lg text-foreground mb-2 font-semibold">
-                Accessible to everyone, everywhere
-              </h4>
-              <p className="text-muted-foreground">
-                Regardless of location, status, or financial background.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-              <Check className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h4 className="text-lg text-foreground mb-2 font-semibold">No barriers to entry</h4>
-              <p className="text-muted-foreground">
-                No minimum balances, credit checks, or institutional gatekeepers.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-              <Check className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h4 className="text-lg text-foreground mb-2 font-semibold">Equal power in global economy</h4>
-              <p className="text-muted-foreground">
-                Every person holds the same rights and capabilities with their money.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+                  {activeTab === "equality" && (
+                    <div className="space-y-6">
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">
+                            Accessible to everyone, everywhere
+                          </h4>
+                          <p className="text-muted-foreground">
+                            Regardless of location, status, or financial background.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">No barriers to entry</h4>
+                          <p className="text-muted-foreground">
+                            No minimum balances, credit checks, or institutional gatekeepers.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg text-foreground mb-2 font-semibold">Equal power in global economy</h4>
+                          <p className="text-muted-foreground">
+                            Every person holds the same rights and capabilities with their money.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
-    {/* Right side - Financial interface mockup with fade transition */}
-    <div className="flex justify-center">
-      <div className="relative w-80 h-96">
-        <img
-          src={
-            activeTab === "stability"
-              ? "/stability-image.jpg"
-              : activeTab === "transparency"
-              ? "/transparency-image.jpg"
-              : "/equality-image.jpg"
-          }
-          alt="Illustration"
-          className="w-80 h-96 object-cover rounded-2xl shadow-2xl transition-opacity duration-700 ease-in-out"
-          key={activeTab} // forces re-render to trigger fade
-        />
-      </div>
-    </div>
-  </div>
-</div>
+                {/* Right side - Financial interface mockup */}
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <img
+                      src="/modern-financial-app-interface-showing-payment-tra.jpg"
+                      alt="Financial interface mockup"
+                      className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
+                    />
+                  </div>
+                </div>
+              </div>
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 mt-12">
