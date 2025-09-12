@@ -680,17 +680,33 @@ export default function CentraHomepage() {
                   )}
                 </div>
 
-                {/* Right side - Financial interface mockup */}
-                <div className="flex justify-center">
-                  <div className="relative">
+              {/* Right side - Financial interface mockup */}
+              <div className="flex justify-center">
+                <div className="relative">
+                  {activeTab === "stability" && (
                     <img
-                      src="/modern-financial-app-interface-showing-payment-tra.jpg"
-                      alt="Financial interface mockup"
+                      src="/stability-image.jpg"
+                      alt="Stability illustration"
                       className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
                     />
-                  </div>
+                  )}
+                  {activeTab === "transparency" && (
+                    <img
+                      src="/transparency-image.jpg"
+                      alt="Transparency illustration"
+                      className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
+                    />
+                  )}
+                  {activeTab === "equality" && (
+                    <img
+                      src="/equality-image.jpg"
+                      alt="Equality illustration"
+                      className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
+                    />
+                  )}
                 </div>
               </div>
+
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 mt-12">
