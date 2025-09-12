@@ -687,6 +687,8 @@ export default function CentraHomepage() {
                     <img
                       src="/stability-image.jpg"
                       alt="Stability illustration"
+                      width={320}  // 👈 required
+                      height={384} // 👈 required
                       className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
                     />
                   )}
@@ -694,6 +696,8 @@ export default function CentraHomepage() {
                     <img
                       src="/transparency-image.jpg"
                       alt="Transparency illustration"
+                      width={320}  // 👈 required
+                      height={384} // 👈 required
                       className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
                     />
                   )}
@@ -701,6 +705,8 @@ export default function CentraHomepage() {
                     <img
                       src="/equality-image.jpg"
                       alt="Equality illustration"
+                      width={320}  // 👈 required
+                      height={384} // 👈 required
                       className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
                     />
                   )}
