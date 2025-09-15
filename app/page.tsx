@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowRight, Menu, X, Check, ArrowDown, TrendingDown, Blocks } from "lucide-react"
@@ -10,6 +10,168 @@ import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { useToast } from "@/hooks/use-toast"
 
+// Timeline Component
+const MoneyTimeline = () => {
+  const [isMobile, setIsMobile] = useState(false)
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!timelineRef.current) return
+    setIsDragging(true)
+    setStartX(e.pageX - timelineRef.current.offsetLeft)
+    setScrollLeft(timelineRef.current.scrollLeft)
+  }
+
+  const handleMouseLeave = () => {
+    setIsDragging(false)
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !timelineRef.current) return
+    e.preventDefault()
+    const x = e.pageX - timelineRef.current.offsetLeft
+    const walk = (x - startX) * 2
+    timelineRef.current.scrollLeft = scrollLeft - walk
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!timelineRef.current) return
+    setIsDragging(true)
+    setStartX(e.touches[0].pageX - timelineRef.current.offsetLeft)
+    setScrollLeft(timelineRef.current.scrollLeft)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !timelineRef.current) return
+    const x = e.touches[0].pageX - timelineRef.current.offsetLeft
+    const walk = (x - startX) * 2
+    timelineRef.current.scrollLeft = scrollLeft - walk
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+  }
+
+  // Desktop timeline with draggable horizontal scroll
+  const DesktopTimeline = () => (
+    <div className="relative w-full py-12">
+      {/* Intro section - fixed above */}
+      <div className="fixed top-0 left-0 right-0 z-10 bg-white shadow-md p-6">
+        <h2 className="text-3xl font-bold text-center mb-2">The history of money</h2>
+        <p className="text-center text-gray-600">
+          From barter systems and government controlled currencies - the future of human exchange is now.
+        </p>
+        <p className="text-center mt-2 font-semibold">
+          Discover why <span className="text-blue-600">Centra</span> represents the next chapter.
+        </p>
+      </div>
+      
+      {/* Timeline with draggable scroll */}
+      <div 
+        ref={timelineRef}
+        className="timeline-container mt-24 flex overflow-x-auto pb-10 px-10 cursor-grab active:cursor-grabbing"
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        <div className="flex space-x-8">
+          {/* Timeline Image */}
+          <div className="min-w-[1200px] w-[1200px]">
+            <Image
+              src="/panoramic-centra-history-of-money.jpg"
+              alt="History of Money Timeline"
+              width={1200}
+              height={600}
+              className="w-full h-auto object-contain rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
+      
+      {/* Outro section - fixed below */}
+      <div className="fixed bottom-0 left-0 right-0 z-10 bg-blue-600 text-white p-6">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <div>
+            <h3 className="text-2xl font-bold">Centra</h3>
+            <p className="text-blue-100">Est 2025, Building on cryptocurrency's foundation</p>
+          </div>
+          <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+
+  // Mobile timeline with vertical layout
+  const MobileTimeline = () => (
+    <div className="w-full py-8 px-4 bg-white">
+      {/* Intro block */}
+      <Card className="bg-white p-6 mb-6">
+        <h2 className="text-2xl font-bold text-center mb-2">The history of money</h2>
+        <p className="text-center text-gray-600 mb-3">
+          From barter systems and government controlled currencies - the future of human exchange is now.
+        </p>
+        <p className="text-center font-semibold">
+          Discover why <span className="text-blue-600">Centra</span> represents the next chapter.
+        </p>
+      </Card>
+      
+      {/* Timeline image for mobile */}
+      <div className="mb-6">
+        <Image
+          src="/panoramic-centra-history-of-money.jpg"
+          alt="History of Money Timeline"
+          width={800}
+          height={1600}
+          className="w-full h-auto object-contain rounded-lg"
+        />
+      </div>
+      
+      {/* Outro block */}
+      <Card className="bg-blue-600 text-white p-6">
+        <h3 className="text-2xl font-bold mb-2">Centra</h3>
+        <p className="text-blue-100 mb-4">Est 2025, Building on cryptocurrency's foundation</p>
+        <button className="bg-white text-blue-600 w-full py-3 rounded-lg font-semibold">
+          Learn More
+        </button>
+      </Card>
+    </div>
+  )
+
+  return (
+    <section className="w-full py-12 bg-gray-50">
+      {isMobile ? <MobileTimeline /> : <DesktopTimeline />}
+    </section>
+  )
+}
+
+// Main Page Component
 export default function CentraHomepage() {
   const [email, setEmail] = useState("")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -315,7 +477,7 @@ export default function CentraHomepage() {
                 size="lg"
                 onClick={scrollToNewsletter}
                 className="bg-white text-black hover:bg-white/90 hover:scale-105 px-10 py-4 text-lg font-medium transition-all duration-300 shadow-lg"
-              >
+                >
                 Join the Movement
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -324,7 +486,7 @@ export default function CentraHomepage() {
                 variant="outline"
                 onClick={scrollToFeatures}
                 className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-10 py-4 text-lg font-medium backdrop-blur-sm bg-transparent transition-all duration-300"
-              >
+                >
                 Read the Vision
               </Button>
             </div>
@@ -410,7 +572,8 @@ export default function CentraHomepage() {
                   alt="Global professionals collaborating on borderless financial solutions"
                   width={320}
                   height={240}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-h极
+                  scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="p-6">
@@ -477,7 +640,8 @@ export default function CentraHomepage() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl text-foreground mb-3 font-semibold">Financial Exclusion</h3>
+                  <h3 className="text-xl text-极
+                  mb-3 font-semibold">Financial Exclusion</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     Centra ends inflation, ends hidden taxation, and ends all barriers to access. Centra moves freely
                     across borders in seconds, meaning every person holds equal power in the global economy.
@@ -486,8 +650,10 @@ export default function CentraHomepage() {
               </Card>
 
               {/* Borders Card - Mobile */}
-              <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl flex-shrink-0 w-80 snap-start group">
-                <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
+              <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl flex-shrink-0 w-极
+              snap-start group">
+                <div className="aspect-[4极
+                relative overflow-hidden rounded-t-2xl">
                   <Image
                     src="/global-business-professionals-collaborating-across.jpg"
                     alt="Global professionals collaborating on borderless financial solutions"
@@ -498,7 +664,8 @@ export default function CentraHomepage() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl text-foreground mb-3 font-semibold">Borders</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="text-muted-foreground text极
+                  leading-relaxed">
                     Centra is not built by one founder or one company. Centra only exists based on demand and adoption
                     of the people. Centra is money that belongs to you, community, and only the community can make it
                     real.
@@ -514,7 +681,8 @@ export default function CentraHomepage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl text-foreground mb-8 leading-tight">Built on Fundamental Principles</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <极
+            className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Centra is built on three fundamental principles that ensure financial freedom and equality for everyone.
             </p>
           </div>
@@ -522,7 +690,8 @@ export default function CentraHomepage() {
           {/* Tabbed Interface */}
           <div className="bg-background border border-border rounded-3xl overflow-hidden shadow-xl">
             {/* Tab Navigation */}
-            <div className="flex border-b border-border">
+            <div className="flex border极
+            border-border">
               <button
                 onClick={() => setActiveTab("stability")}
                 className={`flex-1 px-6 py-4 text-sm font-medium transition-colors duration-200 ${
@@ -538,7 +707,8 @@ export default function CentraHomepage() {
                 className={`flex-1 px-6 py-4 text-sm font-medium transition-colors duration-200 ${
                   activeTab === "transparency"
                     ? "bg-[#1C60FF] text-white"
-                    : "bg-muted/50 text-muted-foreground hover:bg-muted/70"
+                    : "bg-muted/极
+                    text-muted-foreground hover:bg-muted/70"
                 }`}
               >
                 TRANSPARENCY
@@ -575,11 +745,13 @@ export default function CentraHomepage() {
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                        <div className="w-6 h-极
+                        bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
                           <Check className="h-4 w-4 text-white" />
                         </div>
                         <div>
-                          <h4 className="text-lg text-foreground mb-2 font-semibold">Protected from manipulation</h4>
+                          <h4 className="text-lg text-foreground mb-2 font-sem极
+                          ">Protected from manipulation</h4>
                           <p className="text-muted-foreground">
                             Cannot be printed or devalued by any entity for their own purposes.
                           </p>
@@ -605,13 +777,14 @@ export default function CentraHomepage() {
                         <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
                           <Check className="h-4 w-4 text-white" />
                         </div>
+                        <极
                         <div>
                           <h4 className="text-lg text-foreground mb-2 font-semibold">
                             All transactions visible and verifiable
                           </h4>
                           <p className="text-muted-foreground">
                             Complete transparency eliminates corruption and hidden manipulation.
-                          </p>
+                          </极
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
@@ -626,7 +799,8 @@ export default function CentraHomepage() {
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                        <div className="w-6 h-6 bg-[#1C极
+                        rounded-full flex items-center justify-center mt-1 flex-shrink-0">
                           <Check className="h-4 w-4 text-white" />
                         </div>
                         <div>
@@ -642,7 +816,8 @@ export default function CentraHomepage() {
                   {activeTab === "equality" && (
                     <div className="space-y-6">
                       <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                        <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt极
+                        flex-shrink-0">
                           <Check className="h-4 w-4 text-white" />
                         </div>
                         <div>
@@ -710,7 +885,9 @@ export default function CentraHomepage() {
                   onClick={() => {
                     window.location.href = "/developers"
                   }}
-                  className="border-[#1C60FF] text-[#1C60FF] hover:bg-[#1C60FF]/10 px-8 py-3 transition-all duration-300 bg-transparent"
+                  className="border-[#1C60FF]极
+                  text-[#1极
+                  hover:bg-[#1C60FF]/10 px-8 py-3 transition-all duration-300 bg-transparent"
                 >
                   Learn How Centra Works
                 </Button>
@@ -720,89 +897,10 @@ export default function CentraHomepage() {
         </div>
       </section>
 
+      {/* Interactive Timeline Section */}
+      <MoneyTimeline />
+
       <section className="py-0 bg-gradient-to-b from-background to-muted/20">
-        <div className="hidden lg:block w-full">
-          <div className="w-full space-y-0">
-            <Image
-              src="/history-desktop-1.png"
-              alt="The History of Money - Introduction"
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-desktop-2.png"
-              alt="The History of Money - Timeline from Barter System to Cryptocurrency"
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-desktop-3.png"
-              alt="The History of Money - Centra 2025"
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-          </div>
-        </div>
-
-        <div className="lg:hidden w-full">
-          <div className="w-full space-y-0">
-            <Image
-              src="/history-mobile-1.png"
-              alt="The History of Money - Introduction"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-2.png"
-              alt="The History of Money - Barter System and Precious Metals"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-3.png"
-              alt="The History of Money - Coinage and Paper Money"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-4.png"
-              alt="The History of Money - Gold Standard and Fiat Currency"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-5.png"
-              alt="The History of Money - Cryptocurrency and Centra"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-6.png"
-              alt="The History of Money - Centra 2025 Mission"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-          </div>
-        </div>
-
         <div className="max-w-6xl mx-auto px-6 pt-32">
           <div className="text-center mb-16">
             <h3 className="text-4xl md:text-5xl text-foreground mb-6">What Fiat Can Never Offer</h3>
@@ -845,7 +943,7 @@ export default function CentraHomepage() {
                   <div key={index} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-muted-foreground rounded-full mt-3 flex-shrink-0" />
                     <div>
-                      <p className="text-foreground mb-1">{problem.title}</p>
+                      <p className="text-foreground mb-1">{problem.title}</极
                       <p className="text-muted-foreground text-sm">{problem.description}</p>
                     </div>
                   </div>
@@ -855,7 +953,8 @@ export default function CentraHomepage() {
 
             <Card className="border border-border bg-gradient-to-br from-[#1C60FF]/5 to-[#1C60FF]/10 hover:shadow-xl hover:scale-105 transition-all duration-300 p-8">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-gradient-to-b极
+                from-[#1C60FF]/20 to-[#1C60FF]/30 rounded-full flex items-center justify-center">
                   <Image
                     src="/centra-icon.png"
                     alt="Centra"
@@ -885,7 +984,8 @@ export default function CentraHomepage() {
                   },
                   {
                     title: "Equal access for everyone, everywhere",
-                    description: "No barriers, no discrimination, universal financial inclusion",
+                    description: "极
+                    barriers, no discrimination, universal financial inclusion",
                   },
                 ].map((solution, index) => (
                   <div key={index} className="flex items-start gap-3">
@@ -907,7 +1007,8 @@ export default function CentraHomepage() {
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 h-14 px-8 text-lg transition-all duration-300 shadow-lg"
             >
               Compare the Future
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2极
+              w-5" />
             </Button>
           </div>
         </div>
@@ -915,7 +1016,8 @@ export default function CentraHomepage() {
 
       <section className="py-32 px-6 bg-gradient-to-b from-muted/20 to-background" id="why-now-section">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center极
+          mb-16">
             <h2 className="text-4xl md:text-5xl text-foreground mb-8 leading-tight">The Time for Change is Now.</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Short punch lines about inflation, collapsing trust, digital shift.
@@ -926,8 +1028,10 @@ export default function CentraHomepage() {
             {/* Left side - Punchy statements */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-3 h-3 bg-[#1C60FF] rounded-full mt-2 flex-shrink-0" />
+                <div className="极
+                items-start gap-4">
+                  <div className="w-3 h-3 bg-[极
+                  rounded-full mt-2 flex-shrink-0" />
                   <p className="text-lg text-foreground leading-relaxed">
                     <strong>Centra is different; it never loses value.</strong>
                   </p>
@@ -948,7 +1052,7 @@ export default function CentraHomepage() {
                   <div className="w-3 h-3 bg-[#1C60FF] rounded-full mt-2 flex-shrink-0" />
                   <p className="text-lg text-foreground leading-relaxed">
                     <strong>With Centra, credit is honest, a simple flat fee instead of compounding interest.</strong>
-                  </p>
+                  </极
                 </div>
               </div>
 
@@ -960,7 +1064,8 @@ export default function CentraHomepage() {
                     const newsletterSection = document.getElementById("newsletter-section")
                     newsletterSection?.scrollIntoView({ behavior: "smooth" })
                   }}
-                  className="bg-[#1C60FF] text-white hover:bg-[#1C60FF]/90 hover:scale-105 px-8 py-4 text-lg transition-all duration-300 shadow-lg"
+                  className="bg-[#1C60极
+                  text-white hover:bg-[#1C60FF]/90 hover:scale-105 px-8 py-4 text-lg transition-all duration-300 shadow-lg"
                 >
                   Be Early. Be Part of History.
                 </Button>
@@ -977,7 +1082,8 @@ export default function CentraHomepage() {
                       <TrendingDown className="h-6 w-6 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-foreground">Fiat Failures</h3>
+                      <h3 className="text-lg font-semibold text-foreground">极
+                      Failures</h3>
                       <p className="text-sm text-muted-foreground">Inflation • Manipulation • Exclusion</p>
                     </div>
                   </div>
@@ -989,7 +1095,8 @@ export default function CentraHomepage() {
                 </div>
 
                 {/* Blockchain Innovation */}
-                <div className="bg-background border border-border rounded-2xl p-6 shadow-sm">
+                <div className="bg-background border border-border rounded-2xl p-极
+                shadow-sm">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-muted rounded-xl flex items-center justify-center">
                       <Blocks className="h-6 w-6 text-foreground" />
@@ -1004,7 +1111,7 @@ export default function CentraHomepage() {
                 {/* Arrow */}
                 <div className="flex justify-center">
                   <ArrowDown className="h-8 w-8 text-muted-foreground" />
-                </div>
+                </极
 
                 {/* Centra Launch */}
                 <div className="bg-[#1C60FF] border border-[#1C60FF] rounded-2xl p-6 shadow-sm">
@@ -1040,13 +1147,15 @@ export default function CentraHomepage() {
             height={1080}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60极
+          to-black/70" />
         </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
           <div className="mb-8">
-            <p className="text-sm font-medium text-white/80 uppercase tracking-wider mb-4">THE CENTRA MISSION</p>
+            <p className="极
+            font-medium text-white/80 uppercase tracking-wider mb-4">THE CENTRA MISSION</p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-8 leading-tight">
               One World. One Currency.
               <br />
@@ -1061,7 +1170,7 @@ export default function CentraHomepage() {
             <p>
               Centra is not just a currency. It is a chance to give everyone worldwide the same freedom, the same
               access, and the same opportunity to build a future without fear of losing it all.
-            </p>
+            </极
             <p>
               Centra is not built by one founder or one company. Centra only exists based on demand and adoption of the
               people. Centra is money that belongs to you, community, and only the community can make it real.
@@ -1073,7 +1182,8 @@ export default function CentraHomepage() {
               const newsletterSection = document.getElementById("newsletter-section")
               newsletterSection?.scrollIntoView({ behavior: "smooth" })
             }}
-            className="bg-[#1C60FF] text-white hover:bg-[#1C60FF]/90 hover:scale-105 px-10 py-4 text-lg font-medium transition-all duration-300 shadow-lg"
+            className="bg-[#1C60FF] text-white hover:bg-[#1C60FF]/90 hover:极
+            px-10 py-4 text-lg font-medium transition-all duration-300 shadow-lg"
           >
             Join the Movement
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -1106,8 +1216,10 @@ export default function CentraHomepage() {
             </div>
 
             {/* CTA 2 */}
-            <div className="bg-background border border-border hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
-              <h3 className="text-xl font-semibold mb-4 text-foreground">Discover the Whitepaper</h3>
+            <div className="bg-background border border-border hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8极
+            flex flex-col justify-between">
+              <h3 className="text-xl font-semibold mb-4极
+              ">Discover the Whitepaper</h3>
               <p className="text-muted-foreground mb-6">
                 Dive deeper into the Centra vision with our whitepaper and interactive explainer.
               </p>
@@ -1140,7 +1252,8 @@ export default function CentraHomepage() {
         </div>
       </section>
 
-      <section className="py-24 px-6 bg-gradient-to-b from-muted/20 to-muted/40" id="newsletter-section">
+      <section className="py-24 px极
+      bg-gradient-to-b from-muted/20 to-muted/40" id="newsletter-section">
         <div className="max-w-3xl mx-auto text-center">
           <h3 className="text-3xl text-foreground mb-6">Subscribe to Centra newsletter</h3>
           <p className="text-xl text-muted-foreground mb-12">
@@ -1197,130 +1310,134 @@ export default function CentraHomepage() {
                     Download
                   </a>
                 </div>
-                <div>
-                  <a
-                    href="/features"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Features
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="/support"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Support
-                  </a>
-                </div>
-              </nav>
-            </div>
-            <div>
-              <h4 className="text-foreground mb-4">Developers</h4>
-              <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Developers links">
-                <div>
-                  <a
-                    href="/developers"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Documentation
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="/api"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    API
-                  </a>
-                </div>
-              </nav>
-            </div>
-            <div>
-              <h4 className="text-foreground mb-4">Company</h4>
-              <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Company links">
-                <div>
-                  <a
-                    href="/about"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    About
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="/blog"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Blog
-                  </a>
-                </div>
-              </nav>
-            </div>
-            <div>
-              <h4 className="text-foreground mb-4">Legal</h4>
-              <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Legal links">
-                <div>
-                  <a
-                    href="/terms"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Terms
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="/privacy"
-                    className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  >
-                    Privacy
-                  </a>
-                </div>
-              </nav>
-            </div>
+                <极
+                <a
+                  href="/features"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
+                >
+                  Features
+                </a>
+              </div>
+              <div>
+                <a
+                  href="/support"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[极
+                  rounded"
+                >
+                  Support
+                </a>
+              </div>
+            </nav>
           </div>
-          <div className="border-t border-border pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm text-muted-foreground mb-4 md:mb-0">© 2024 Centra. All rights reserved.</div>
-              <nav className="flex space-x-6 text-sm text-muted-foreground" aria-label="Social media links">
+          <div>
+            <h4 className="text-foreground mb-4">Developers</h4>
+            <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Developers links">
+              <div>
                 <a
-                  href="https://x.com/Centracurrency"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/developers"
                   className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  aria-label="Follow us on X (Twitter)"
                 >
-                  X (Twitter)
+                  Documentation
                 </a>
+              </div>
+              <div>
                 <a
-                  href="https://www.facebook.com/centracurrency/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/api"
                   className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  aria-label="Follow us on Facebook"
                 >
-                  Facebook
+                  API
                 </a>
+              </div>
+            </nav>
+          </div>
+          <div>
+            <h4 className="text-foreground mb-4">Company</h4>
+            <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Company links">
+              <div>
                 <a
-                  href="https://www.linkedin.com/company/centracurrency/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/about"
                   className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  aria-label="Connect on LinkedIn"
                 >
-                  LinkedIn
+                  About
                 </a>
+              </div>
+              <div>
                 <a
-                  href="https://www.instagram.com/centracurrency/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
-                  aria-label="Follow us on Instagram"
+                  href="/blog"
+                  className="hover:text-foreground focus:outline-none极
+                  focus:ring-2 focus:ring-[#1C60FF] rounded"
                 >
-                  Instagram
+                  Blog
+                </极
+              </div>
+            </nav>
+          </div>
+          <div>
+            <h4 className="text-foreground mb-4">Legal</极
+            <nav className="space-y-2 text-sm text-muted-foreground" aria-label="Legal links">
+              <div>
+                <a
+                  href="/terms"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
+                >
+                  Terms
                 </a>
-              </nav>
-            </div>
+              </div>
+              <div>
+                <a
+                 极
+                 href="/privacy"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
+                >
+                  Privacy
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div className="border-t border-border pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="text-sm text-muted-foreground mb-4 md:mb-0">© 2024 Centra. All rights reserved.</div>
+            <nav className="flex space-x-6 text-sm text-muted-foreground" aria-label="Social media links">
+              <a
+                href="https://x.com/Centracurrency"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
+                aria-label="Follow us on X (Twitter)"
+              >
+                X (Twitter)
+              </a>
+              <a
+                href="https://极
+                facebook.com/centracurrency/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60极
+                rounded"
+                aria-label="Follow us on Facebook"
+              >
+                Facebook
+              </a>
+              <a
+                href="https://www.linkedin.com/company/centracurrency/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
+                aria-label="Connect on LinkedIn"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://www.instagram.com/centrac极
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[#1C60FF] rounded"
+                aria-label="Follow us on Instagram"
+              >
+                Instagram
+              </a>
+            </nav>
           </div>
         </div>
       </footer>
