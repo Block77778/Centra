@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowRight, Menu, X, Check, ArrowDown, TrendingDown, Blocks } from "lucide-react"
@@ -10,6 +10,218 @@ import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { useToast } from "@/hooks/use-toast"
 
+// Timeline Component
+const MoneyTimeline = () => {
+  const [isMobile, setIsMobile] = useState(false)
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!timelineRef.current) return
+    setIsDragging(true)
+    setStartX(e.pageX - timelineRef.current.offsetLeft)
+    setScrollLeft(timelineRef.current.scrollLeft)
+  }
+
+  const handleMouseLeave = () => {
+    setIsDragging(false)
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !timelineRef.current) return
+    e.preventDefault()
+    const x = e.pageX - timelineRef.current.offsetLeft
+    const walk = (x - startX) * 2
+    timelineRef.current.scrollLeft = scrollLeft - walk
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!timelineRef.current) return
+    setIsDragging(true)
+    setStartX(e.touches[0].pageX - timelineRef.current.offsetLeft)
+    setScrollLeft(timelineRef.current.scrollLeft)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !timelineRef.current) return
+    const x = e.touches[0].pageX - timelineRef.current.offsetLeft
+    const walk = (x - startX) * 2
+    timelineRef.current.scrollLeft = scrollLeft - walk
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+  }
+
+  const timelineData = [
+    {
+      date: "10,000 BCE",
+      title: "Barter Systems",
+      quote: "Trade began with simple exchange of surplus goods.",
+      description: "Direct exchange of goods & services for goods & services. Although effective in ancient societies, bartering as a system with no money has limitations in modern societies."
+    },
+    {
+      date: "3,000 BCE",
+      title: "Precious Metals",
+      quote: "Gold became the universal language of value",
+      description: "Gold and Silver became mediums of exchange due to them being rare, durable and universally recognised."
+    },
+    {
+      date: "640 BCE",
+      title: "Coinage",
+      quote: "Coins revolutionised commerce across civilisations.",
+      description: "The first standardised coins are minted in Lydia (modern day Turkey), a mix of gold and silver with a royal symbol. This recognised way of exchanging and storing value changed trade forever."
+    },
+    {
+      date: "1000 CE",
+      title: "Paper Money",
+      quote: "Paper money made large transactions practical.",
+      description: "Paper currency named Jiaozi is introduced in China, printed by merchants. The Song Dynasty backs the paper currency and takes over production due to issues with inflation."
+    },
+    {
+      date: "1870s",
+      title: "Gold Standard",
+      quote: "Gold Standard provided global monetary stability.",
+      description: "Bretton Woods system established a gold-backed international money system where government ties currency to fixed amounts of gold."
+    },
+    {
+      date: "1971",
+      title: "Fiat Currency",
+      quote: "Fiat money enabled flexible money policy.",
+      description: "Nixon ended gold convertibility, creating a modern fiat money system. Fiat money is government issued, typically not backed by precious metal or any other tangible asset."
+    },
+    {
+      date: "2009",
+      title: "Cryptocurrency",
+      quote: "Cryptocurrency challenged traditional monetary systems",
+      description: "Crypto introduced decentralised digital currency and blockchain technology. Representing digital assets over physical money. Currency is now out of control from one person, group or entity."
+    },
+    {
+      date: "2025",
+      title: "Centra",
+      quote: "Centra completes money's evolution; a system with true equality.",
+      description: "Building on cryptocurrency's foundation, Centra delivers stable, transparent, and equal money designed to serve humanity. The natural progression from crypto to true financial freedom."
+    }
+  ]
+
+  // Desktop timeline with draggable horizontal scroll
+  const DesktopTimeline = () => (
+    <div className="relative w-full py-12">
+      {/* Intro section - fixed above */}
+      <div className="fixed top-0 left-0 right-0 z-10 bg-white shadow-md p-6">
+        <h2 className="text-3xl font-bold text-center mb-2">The history of money</h2>
+        <p className="text-center text-gray-600">
+          From barter systems and government controlled currencies - the future of human exchange is now.
+        </p>
+        <p className="text-center mt-2 font-semibold">
+          Discover why <span className="text-blue-600">Centra</span> represents the next chapter.
+        </p>
+      </div>
+      
+      {/* Timeline with draggable scroll */}
+      <div 
+        ref={timelineRef}
+        className="timeline-container mt-24 flex overflow-x-auto pb-10 px-10 cursor-grab active:cursor-grabbing"
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        <div className="flex space-x-8">
+          {timelineData.map((item, index) => (
+            <Card key={index} className="min-w-[300px] w-[300px] h-[400px] p-6 flex flex-col">
+              <div className="text-sm text-blue-600 font-semibold mb-2">{item.date}</div>
+              <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+              <p className="text-gray-500 italic mb-4">"{item.quote}"</p>
+              <p className="text-gray-700 flex-grow">{item.description}</p>
+            </Card>
+          ))}
+        </div>
+      </div>
+      
+      {/* Outro section - fixed below */}
+      <div className="fixed bottom-0 left-0 right-0 z-10 bg-blue-600 text-white p-6">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <div>
+            <h3 className="text-2xl font-bold">Centra</h3>
+            <p className="text-blue-100">Est 2025, Building on cryptocurrency's foundation</p>
+          </div>
+          <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+
+  // Mobile timeline with vertical layout
+  const MobileTimeline = () => (
+    <div className="w-full py-8 px-4">
+      {/* Intro block */}
+      <Card className="bg-white p-6 mb-6">
+        <h2 className="text-2xl font-bold text-center mb-2">The history of money</h2>
+        <p className="text-center text-gray-600 mb-3">
+          From barter systems and government controlled currencies - the future of human exchange is now.
+        </p>
+        <p className="text-center font-semibold">
+          Discover why <span className="text-blue-600">Centra</span> represents the next chapter.
+        </p>
+      </Card>
+      
+      {/* Timeline blocks */}
+      <div className="space-y-6">
+        {timelineData.map((item, index) => (
+          <Card key={index} className="bg-white p-6">
+            <div className="text-sm text-blue-600 font-semibold mb-2">{item.date}</div>
+            <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+            <p className="text-gray-500 italic mb-4">"{item.quote}"</p>
+            <p className="text-gray-700">{item.description}</p>
+          </Card>
+        ))}
+      </div>
+      
+      {/* Outro block */}
+      <Card className="bg-blue-600 text-white p-6 mt-6">
+        <h3 className="text-2xl font-bold mb-2">Centra</h3>
+        <p className="text-blue-100 mb-4">Est 2025, Building on cryptocurrency's foundation</p>
+        <button className="bg-white text-blue-600 w-full py-3 rounded-lg font-semibold">
+          Learn More
+        </button>
+      </Card>
+    </div>
+  )
+
+  return (
+    <section className="w-full py-12 bg-gray-50">
+      {isMobile ? <MobileTimeline /> : <DesktopTimeline />}
+    </section>
+  )
+}
+
+// Main Page Component
 export default function CentraHomepage() {
   const [email, setEmail] = useState("")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -625,7 +837,7 @@ export default function CentraHomepage() {
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-start gap-3">
+                      <div className="flex itemsStart gap-3">
                         <div className="w-6 h-6 bg-[#1C60FF] rounded-full flex items-center justify-center mt-1 flex-shrink-0">
                           <Check className="h-4 w-4 text-white" />
                         </div>
@@ -693,7 +905,7 @@ export default function CentraHomepage() {
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 mt-12">
+              <div className="flex flex-col sm:flexRow gap-4 mt-12">
                 <Button
                   size="lg"
                   onClick={() => {
@@ -720,89 +932,10 @@ export default function CentraHomepage() {
         </div>
       </section>
 
+      {/* Interactive Timeline Section */}
+      <MoneyTimeline />
+
       <section className="py-0 bg-gradient-to-b from-background to-muted/20">
-        <div className="hidden lg:block w-full">
-          <div className="w-full space-y-0">
-            <Image
-              src="/history-desktop-1.png"
-              alt="The History of Money - Introduction"
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-desktop-2.png"
-              alt="The History of Money - Timeline from Barter System to Cryptocurrency"
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-desktop-3.png"
-              alt="The History of Money - Centra 2025"
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-          </div>
-        </div>
-
-        <div className="lg:hidden w-full">
-          <div className="w-full space-y-0">
-            <Image
-              src="/history-mobile-1.png"
-              alt="The History of Money - Introduction"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-2.png"
-              alt="The History of Money - Barter System and Precious Metals"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-3.png"
-              alt="The History of Money - Coinage and Paper Money"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-4.png"
-              alt="The History of Money - Gold Standard and Fiat Currency"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-5.png"
-              alt="The History of Money - Cryptocurrency and Centra"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-6.png"
-              alt="The History of Money - Centra 2025 Mission"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-          </div>
-        </div>
-
         <div className="max-w-6xl mx-auto px-6 pt-32">
           <div className="text-center mb-16">
             <h3 className="text-4xl md:text-5xl text-foreground mb-6">What Fiat Can Never Offer</h3>
@@ -1074,7 +1207,7 @@ export default function CentraHomepage() {
               newsletterSection?.scrollIntoView({ behavior: "smooth" })
             }}
             className="bg-[#1C60FF] text-white hover:bg-[#1C60FF]/90 hover:scale-105 px-10 py-4 text-lg font-medium transition-all duration-300 shadow-lg"
-          >
+            >
             Join the Movement
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -1121,7 +1254,7 @@ export default function CentraHomepage() {
               </a>
             </div>
 
-            {/* CTA 3 */}
+                        {/* CTA 3 */}
             <div className="bg-muted/50 hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
               <h3 className="text-xl font-semibold mb-4 text-foreground">Join the Community</h3>
               <p className="text-muted-foreground mb-6">
