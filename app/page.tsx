@@ -9,6 +9,7 @@ import PersistentCTA from "@/components/PersistentCTA"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { useToast } from "@/hooks/use-toast"
+import { InteractiveTimeline } from "@/components/interactive-timeline"
 
 export default function CentraHomepage() {
   const [email, setEmail] = useState("")
@@ -683,11 +684,27 @@ export default function CentraHomepage() {
                 {/* Right side - Financial interface mockup */}
                 <div className="flex justify-center">
                   <div className="relative">
-                    <img
-                      src="/modern-financial-app-interface-showing-payment-tra.jpg"
-                      alt="Financial interface mockup"
-                      className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
-                    />
+                    {activeTab === "stability" && (
+                      <img
+                        src="/stability-image.png"
+                        alt="Financial stability - balanced scales with currency"
+                        className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
+                      />
+                    )}
+                    {activeTab === "transparency" && (
+                      <img
+                        src="/transparency-image.jpg"
+                        alt="Financial transparency - businessman viewing financial data"
+                        className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
+                      />
+                    )}
+                    {activeTab === "equality" && (
+                      <img
+                        src="/equality-image.png"
+                        alt="Financial equality - people using mobile financial services"
+                        className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
+                      />
+                    )}
                   </div>
                 </div>
               </div>
@@ -720,89 +737,11 @@ export default function CentraHomepage() {
         </div>
       </section>
 
-      <section className="py-0 bg-gradient-to-b from-background to-muted/20">
-        <div className="hidden lg:block w-full">
-          <div className="w-full space-y-0">
-            <Image
-              src="/history-desktop-1.png"
-              alt="The History of Money - Introduction"
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-desktop-2.png"
-              alt="The History of Money - Timeline from Barter System to Cryptocurrency"
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-desktop-3.png"
-              alt="The History of Money - Centra 2025"
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-          </div>
-        </div>
+      <section className="py-0">
+        <InteractiveTimeline />
+      </section>
 
-        <div className="lg:hidden w-full">
-          <div className="w-full space-y-0">
-            <Image
-              src="/history-mobile-1.png"
-              alt="The History of Money - Introduction"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-2.png"
-              alt="The History of Money - Barter System and Precious Metals"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-3.png"
-              alt="The History of Money - Coinage and Paper Money"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-4.png"
-              alt="The History of Money - Gold Standard and Fiat Currency"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-5.png"
-              alt="The History of Money - Cryptocurrency and Centra"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-            <Image
-              src="/history-mobile-6.png"
-              alt="The History of Money - Centra 2025 Mission"
-              width={375}
-              height={667}
-              className="w-full h-auto block"
-              priority
-            />
-          </div>
-        </div>
-
+      <section className="py-32 px-6 bg-gradient-to-b from-background to-muted/20">
         <div className="max-w-6xl mx-auto px-6 pt-32">
           <div className="text-center mb-16">
             <h3 className="text-4xl md:text-5xl text-foreground mb-6">What Fiat Can Never Offer</h3>
@@ -903,7 +842,7 @@ export default function CentraHomepage() {
           <div className="text-center mt-12">
             <Button
               size="lg"
-              onClick={() => window.open('/explainer', '_blank')}
+              onClick={() => window.open("/explainer", "_blank")}
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 h-14 px-8 text-lg transition-all duration-300 shadow-lg"
             >
               Compare the Future
@@ -1086,7 +1025,8 @@ export default function CentraHomepage() {
         <div className="max-w-6xl mx-auto text-center">
           {/* Bold Statement */}
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-12">
-            Centra isn't coming. It's here. <br />And it belongs to the world.
+            Centra isn't coming. It's here. <br />
+            And it belongs to the world.
           </h2>
 
           {/* CTA Cards */}
@@ -1094,9 +1034,7 @@ export default function CentraHomepage() {
             {/* CTA 1 */}
             <div className="bg-muted/50 hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-2xl p-8 flex flex-col justify-between">
               <h3 className="text-xl font-semibold mb-4 text-foreground">Get Started with Centra</h3>
-              <p className="text-muted-foreground mb-6">
-                Download the Centra wallet app and start your journey today.
-              </p>
+              <p className="text-muted-foreground mb-6">Download the Centra wallet app and start your journey today.</p>
               <a
                 href="/download"
                 className="text-[#1C60FF] font-medium hover:underline flex items-center justify-center gap-2"
