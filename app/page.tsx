@@ -686,7 +686,7 @@ export default function CentraHomepage() {
                   <div className="relative">
                     {activeTab === "stability" && (
                       <img
-                        src="/Stability-image.png"
+                        src="/stability-image.jpg"
                         alt="Financial stability - balanced scales with currency"
                         className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
                       />
@@ -700,7 +700,7 @@ export default function CentraHomepage() {
                     )}
                     {activeTab === "equality" && (
                       <img
-                        src="/Equality-image.png"
+                        src="/Equality-image.jpg"
                         alt="Financial equality - people using mobile financial services"
                         className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
                       />
