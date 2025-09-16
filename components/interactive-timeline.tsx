@@ -11,14 +11,13 @@ interface TimelineProps {
 }
 
 const timelineBlocks = [
-  { id: 0, label: "History of Money", position: 0 },
-  { id: 1, label: "10,000 BCE - Barter Systems", position: 14 },
-  { id: 2, label: "3,000 BCE - Precious Metals", position: 28 },
-  { id: 3, label: "600 BCE - Coinage", position: 42 },
-  { id: 4, label: "1000 CE - Paper Money", position: 56 },
-  { id: 5, label: "1944 - Gold Standard", position: 70 },
-  { id: 6, label: "1971 - Fiat Currency", position: 84 },
-  { id: 7, label: "2009 - Cryptocurrency", position: 98 },
+  { id: 1, label: "10,000 BCE - Barter Systems", position: 0 },
+  { id: 2, label: "3,000 BCE - Precious Metals", position: 16.6 },
+  { id: 3, label: "600 BCE - Coinage", position: 33.2 },
+  { id: 4, label: "1000 CE - Paper Money", position: 49.8 },
+  { id: 5, label: "1944 - Gold Standard", position: 66.4 },
+  { id: 6, label: "1971 - Fiat Currency", position: 83 },
+  { id: 7, label: "2009 - Cryptocurrency", position: 99.6 },
 ]
 
 export function InteractiveTimeline({ className }: TimelineProps) {
@@ -153,7 +152,7 @@ export function InteractiveTimeline({ className }: TimelineProps) {
         <div
           ref={containerRef}
           className="relative bg-black overflow-hidden cursor-grab active:cursor-grabbing select-none"
-          style={{ height: "45vh", minHeight: "350px", maxHeight: "450px" }} // Reduced height to eliminate empty black space
+          style={{ height: "90vh", minHeight: "700px", maxHeight: "900px" }} // Doubled height
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -165,7 +164,7 @@ export function InteractiveTimeline({ className }: TimelineProps) {
             ref={timelineRef}
             className="absolute inset-0 transition-transform duration-500 ease-out will-change-transform"
             style={{
-              transform: `translateX(-${getCurrentPosition() * 0.85}%)`, // Adjusted transform calculation to properly align image sections with blocks
+              transform: `translateX(-${getCurrentPosition() * 0.85}%)`,
               width: "280%",
             }}
           >
@@ -195,13 +194,8 @@ export function InteractiveTimeline({ className }: TimelineProps) {
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-black/60 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
-            <div className="flex items-center space-x-3 text-white text-sm">
-              <span className="font-medium">{timelineBlocks[currentBlock].label}</span>
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-            </div>
-          </div>
-
+          {/* Removed the block name display from bottom */}
+          
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {timelineBlocks.map((block, index) => (
               <button
@@ -220,7 +214,7 @@ export function InteractiveTimeline({ className }: TimelineProps) {
         <div className="bg-white rounded-lg p-6 shadow-sm border">
           <div
             className="relative w-full overflow-hidden rounded-lg cursor-grab active:cursor-grabbing"
-            style={{ height: "220px" }} // Reduced mobile height
+            style={{ height: "440px" }} // Doubled mobile height
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -228,7 +222,7 @@ export function InteractiveTimeline({ className }: TimelineProps) {
             <div
               className="absolute inset-0 transition-transform duration-500 ease-out will-change-transform"
               style={{
-                transform: `translateX(-${getCurrentPosition() * 0.75}%)`, // Adjusted mobile transform for better alignment
+                transform: `translateX(-${getCurrentPosition() * 0.75}%)`,
                 width: "220%",
               }}
             >
@@ -258,9 +252,7 @@ export function InteractiveTimeline({ className }: TimelineProps) {
               <ChevronRight className="w-4 h-4" />
             </button>
 
-            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1">
-              <span className="text-white text-xs">{timelineBlocks[currentBlock].label}</span>
-            </div>
+            {/* Removed the block name display from bottom for mobile */}
           </div>
 
           <div className="flex justify-center space-x-2 mt-4">
