@@ -19,7 +19,7 @@ const timelineBlocks = [
   { id: 6, label: "1944-2025", position: 83.33 },
 ]
 
-const desktopBlocks = timelineBlocks.slice(0, 5) // Reduced from 5 to 4 blocks for desktop to eliminate black space
+const desktopBlocks = timelineBlocks.slice(0, 3) // Reduced from 5 to 4 blocks for desktop to eliminate black space
 const mobileBlocks = timelineBlocks.slice(0, 6) // Increased from 5 to 6 blocks for mobile so it doesn't end before image ends
 
 export function InteractiveTimeline({ className }: TimelineProps) {
