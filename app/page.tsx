@@ -973,7 +973,7 @@ export default function CentraHomepage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/global-community-borderless-currency-worldwide-fin.jpg"
+            src="/Centra-Mission-Statement.jpg"
             alt="Global community connected digitally representing worldwide financial inclusion"
             width={1920}
             height={1080}
