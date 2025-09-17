@@ -347,7 +347,7 @@ export default function CentraHomepage() {
             <Card className="border border-border bg-background hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl group">
               <div className="aspect-[4/3] relative overflow-hidden rounded-t-2xl">
                 <Image
-                  src="/professional-business-person-reviewing-financial-d.jpg"
+                  src="/Inflation.jpg"
                   alt="Professional reviewing financial documents with concern about inflation"
                   width={320}
                   height={240}
@@ -686,7 +686,7 @@ export default function CentraHomepage() {
                   <div className="relative">
                     {activeTab === "stability" && (
                       <img
-                        src="/stability-image.jpg"
+                        src="/Stability.jpg"
                         alt="Financial stability - balanced scales with currency"
                         className="w-80 h-96 object-cover rounded-2xl shadow-2xl"
                       />
