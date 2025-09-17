@@ -173,7 +173,7 @@ export function InteractiveTimeline({ className }: TimelineProps) {
         <div
           ref={containerRef}
           className="relative bg-black overflow-hidden cursor-grab active:cursor-grabbing select-none"
-          style={{ height: "100vh", minHeight: "800px", maxHeight: "1000px" }}
+          style={{ height: "83vh", minHeight: "667px", maxHeight: "833px" }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
