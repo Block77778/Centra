@@ -11,14 +11,16 @@ interface TimelineProps {
 }
 
 const timelineBlocks = [
-  { id: 1, label: "10,000 BCE - Barter Systems", position: 0 },
-  { id: 2, label: "3,000 BCE - Precious Metals", position: 16.6 },
-  { id: 3, label: "600 BCE - Coinage", position: 33.2 },
-  { id: 4, label: "1000 CE - Paper Money", position: 49.8 },
-  { id: 5, label: "1944 - Gold Standard", position: 66.4 },
-  { id: 6, label: "1971 - Fiat Currency", position: 83 },
-  { id: 7, label: "2009 - Cryptocurrency", position: 99.6 },
+  { id: 1, label: "History of Money", position: 0 },
+  { id: 2, label: "10,000 BCE", position: 16.67 },
+  { id: 3, label: "3,000 BCE", position: 33.33 },
+  { id: 4, label: "600 BCE", position: 50 },
+  { id: 5, label: "1000 CE", position: 66.67 },
+  { id: 6, label: "1944-2025", position: 83.33 },
 ]
+
+const desktopBlocks = timelineBlocks.slice(0, 5) // Changed from 4 to 5 blocks for desktop
+const mobileBlocks = timelineBlocks.slice(0, 5) // Remove last 1 block for mobile
 
 export function InteractiveTimeline({ className }: TimelineProps) {
   const [isDragging, setIsDragging] = useState(false)
@@ -28,17 +30,33 @@ export function InteractiveTimeline({ className }: TimelineProps) {
   const timelineRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
+  const getCurrentBlocks = () => (isMobile ? mobileBlocks : desktopBlocks)
+
   const getCurrentPosition = () => {
-    return timelineBlocks[currentBlock].position
+    const blocks = getCurrentBlocks()
+    return blocks[currentBlock]?.position || 0
   }
 
   const navigateToBlock = (blockIndex: number) => {
-    const clampedIndex = Math.max(0, Math.min(timelineBlocks.length - 1, blockIndex))
+    const blocks = getCurrentBlocks()
+    const clampedIndex = Math.max(0, Math.min(blocks.length - 1, blockIndex))
     setCurrentBlock(clampedIndex)
   }
 
   const nextBlock = () => {
-    if (currentBlock < timelineBlocks.length - 1) {
+    const blocks = getCurrentBlocks()
+    if (currentBlock < blocks.length - 1) {
       navigateToBlock(currentBlock + 1)
     }
   }
@@ -65,8 +83,9 @@ export function InteractiveTimeline({ className }: TimelineProps) {
     if (Math.abs(dragDistance) > threshold) {
       const direction = dragDistance > 0 ? -1 : 1
       const newBlock = dragStartBlock + direction
+      const blocks = getCurrentBlocks()
 
-      if (newBlock >= 0 && newBlock < timelineBlocks.length && newBlock !== currentBlock) {
+      if (newBlock >= 0 && newBlock < blocks.length && newBlock !== currentBlock) {
         setCurrentBlock(newBlock)
         setDragStartX(e.clientX)
         setDragStartBlock(newBlock)
@@ -89,8 +108,9 @@ export function InteractiveTimeline({ className }: TimelineProps) {
       if (Math.abs(dragDistance) > threshold) {
         const direction = dragDistance > 0 ? -1 : 1
         const newBlock = dragStartBlock + direction
+        const blocks = getCurrentBlocks()
 
-        if (newBlock >= 0 && newBlock < timelineBlocks.length && newBlock !== currentBlock) {
+        if (newBlock >= 0 && newBlock < blocks.length && newBlock !== currentBlock) {
           setCurrentBlock(newBlock)
           setDragStartX(e.clientX)
           setDragStartBlock(newBlock)
@@ -114,7 +134,7 @@ export function InteractiveTimeline({ className }: TimelineProps) {
       document.body.style.cursor = ""
       document.body.style.userSelect = ""
     }
-  }, [isDragging, dragStartX, dragStartBlock, currentBlock])
+  }, [isDragging, dragStartX, dragStartBlock, currentBlock, isMobile])
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsDragging(true)
@@ -132,8 +152,9 @@ export function InteractiveTimeline({ className }: TimelineProps) {
     if (Math.abs(dragDistance) > threshold) {
       const direction = dragDistance > 0 ? -1 : 1
       const newBlock = dragStartBlock + direction
+      const blocks = getCurrentBlocks()
 
-      if (newBlock >= 0 && newBlock < timelineBlocks.length && newBlock !== currentBlock) {
+      if (newBlock >= 0 && newBlock < blocks.length && newBlock !== currentBlock) {
         setCurrentBlock(newBlock)
         setDragStartX(e.touches[0].clientX)
         setDragStartBlock(newBlock)
@@ -152,7 +173,7 @@ export function InteractiveTimeline({ className }: TimelineProps) {
         <div
           ref={containerRef}
           className="relative bg-black overflow-hidden cursor-grab active:cursor-grabbing select-none"
-          style={{ height: "90vh", minHeight: "700px", maxHeight: "900px" }} // Doubled height
+          style={{ height: "100vh", minHeight: "800px", maxHeight: "1000px" }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -164,15 +185,15 @@ export function InteractiveTimeline({ className }: TimelineProps) {
             ref={timelineRef}
             className="absolute inset-0 transition-transform duration-500 ease-out will-change-transform"
             style={{
-              transform: `translateX(-${getCurrentPosition() * 0.85}%)`,
-              width: "280%",
+              transform: `translateX(-${getCurrentPosition() * 1.0}%)`,
+              width: "600%",
             }}
           >
             <Image
               src="/history-timeline.jpg"
               alt="Interactive Timeline - The History of Money from 10,000 BCE to 2025"
               fill
-              className="object-cover object-left"
+              className="object-contain object-left"
               priority
               draggable={false}
             />
@@ -188,16 +209,14 @@ export function InteractiveTimeline({ className }: TimelineProps) {
 
           <button
             onClick={nextBlock}
-            disabled={currentBlock === timelineBlocks.length - 1}
+            disabled={currentBlock === desktopBlocks.length - 1}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 backdrop-blur-sm rounded-full p-3 border border-white/20 text-white hover:bg-black/80 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Removed the block name display from bottom */}
-          
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {timelineBlocks.map((block, index) => (
+            {desktopBlocks.map((block, index) => (
               <button
                 key={block.id}
                 onClick={() => navigateToBlock(index)}
@@ -210,58 +229,58 @@ export function InteractiveTimeline({ className }: TimelineProps) {
         </div>
       </div>
 
-      <div className="lg:hidden space-y-6 p-6">
-        <div className="bg-white rounded-lg p-6 shadow-sm border">
+      {/* Mobile Timeline */}
+      <div className="lg:hidden">
+        <div
+          className="relative w-full bg-black overflow-hidden cursor-grab active:cursor-grabbing select-none"
+          style={{ height: "60vh", minHeight: "500px" }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div
-            className="relative w-full overflow-hidden rounded-lg cursor-grab active:cursor-grabbing"
-            style={{ height: "440px" }} // Doubled mobile height
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            className="absolute inset-0 transition-transform duration-500 ease-out will-change-transform"
+            style={{
+              transform: `translateX(-${getCurrentPosition() * 1.0}%)`,
+              width: "900%",
+            }}
           >
-            <div
-              className="absolute inset-0 transition-transform duration-500 ease-out will-change-transform"
-              style={{
-                transform: `translateX(-${getCurrentPosition() * 0.75}%)`,
-                width: "220%",
-              }}
-            >
-              <Image
-                src="/history-timeline.jpg"
-                alt="The History of Money Timeline from 10,000 BCE to 2025"
-                fill
-                className="object-cover object-left"
-                priority
-                draggable={false}
-              />
-            </div>
-
-            <button
-              onClick={prevBlock}
-              disabled={currentBlock === 0}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/60 backdrop-blur-sm rounded-full p-2 text-white disabled:opacity-50"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={nextBlock}
-              disabled={currentBlock === timelineBlocks.length - 1}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/60 backdrop-blur-sm rounded-full p-2 text-white disabled:opacity-50"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-
-            {/* Removed the block name display from bottom for mobile */}
+            <Image
+              src="/history-timeline.jpg"
+              alt="The History of Money Timeline from 10,000 BCE to 2025"
+              fill
+              className="object-contain object-left"
+              priority
+              draggable={false}
+            />
           </div>
 
-          <div className="flex justify-center space-x-2 mt-4">
-            {timelineBlocks.map((block, index) => (
+          <button
+            onClick={prevBlock}
+            disabled={currentBlock === 0}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 backdrop-blur-sm rounded-full p-3 border border-white/20 text-white hover:bg-black/80 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={nextBlock}
+            disabled={currentBlock === mobileBlocks.length - 1}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 backdrop-blur-sm rounded-full p-3 border border-white/20 text-white hover:bg-black/80 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            {mobileBlocks.map((block, index) => (
               <button
                 key={block.id}
                 onClick={() => navigateToBlock(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                  index === currentBlock ? "bg-blue-600 scale-125" : "bg-gray-300 hover:bg-gray-400"
+                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  index === currentBlock ? "bg-blue-400 scale-125" : "bg-white/30 hover:bg-white/50"
                 }`}
               />
             ))}
