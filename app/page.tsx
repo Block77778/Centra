@@ -995,7 +995,6 @@ export default function CentraHomepage() {
          />
          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
        </div>
-     </section>
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
