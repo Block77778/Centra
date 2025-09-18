@@ -970,21 +970,32 @@ export default function CentraHomepage() {
       </section>
 
       <section className="relative py-32 px-6 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
+        {/* Mobile Image (portrait, full visible) */}
+        <div className="absolute inset-0 sm:hidden">
           <Image
-            src="/Centra-Mission-Statement.jpg"
+            src="/Centra-Mission-Statement-mobile.jpg"
             alt="Global community connected digitally representing worldwide financial inclusion"
-            width={1920}
-            height={1080}
-            className="
-              w-full h-full 
-              object-cover md:object-cover 
-              object-[center_top] sm:object-center
-            "
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
-        </div>
+            width={1080}
+            height={1920}
+            className="w-full h-full object-contain"
+            priority
+         />
+         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+       </div>
+
+       {/* Desktop Image (landscape, cropped) */}
+       <div className="absolute inset-0 hidden sm:block">
+         <Image
+           src="/Centra-Mission-Statement.jpg"
+           alt="Global community connected digitally representing worldwide financial inclusion"
+           width={1920}
+           height={1080}
+           className="w-full h-full object-cover"
+           priority
+         />
+         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+       </div>
+     </section>
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
