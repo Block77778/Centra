@@ -977,7 +977,7 @@ export default function CentraHomepage() {
             alt="Global community connected digitally representing worldwide financial inclusion"
             width={1080}
             height={1920}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-cover"
             priority
          />
          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
