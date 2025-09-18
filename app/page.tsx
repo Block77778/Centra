@@ -973,7 +973,7 @@ export default function CentraHomepage() {
         {/* Mobile Image (portrait, full visible) */}
         <div className="absolute inset-0 sm:hidden">
           <Image
-            src="/Centra-Mission-Statement-Mobile.jpg"
+            src="/Mission-Statement-Mobile.jpg"
             alt="Global community connected digitally representing worldwide financial inclusion"
             width={1080}
             height={1920}
